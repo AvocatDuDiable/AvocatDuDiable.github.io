@@ -8,42 +8,54 @@
     <title>Allan Start page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./styles.css"/>
 </head>
 <body>
     <main role=main class="container">
-        <h1 class="text-center">Bonjour Allan</h1>
-        <div class="lead text-center text-danger" id="horloge" >Chargement de l'heure ...</div>     
+        <h1 class="text-center" id="himessage"> Hi message</h1>
+        <div class="lead text-center text-danger"> ⏰ <span id="horloge">Chargement de l'heure ...</span></div>     
+        <br>
+        <form class="card" action="https://google.fr/search" method="get" target="_blank">
+            <input class="search-bar form-control" type="text" 
+            autocomplete="off" autofocus="" placeholder="Recherche Google" name="q" 
+            alt="Recherche Google">
+        </form>
         <br>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <div>
-                    <h5><i class="bi bi-chat-dots-fill"></i> Communication</h5>
+                    <h4><i class="bi bi-chat-dots-fill"></i> Communication</h4>
                     <ul>
                         <li><a href="https://www.messenger.com/">Messenger</a></li>
                         <li><a href="https://outlook.live.com/">Outlook</a></li>
                         <li><a href="https://mail.google.com/mail">Gmail</a></li>
                         <li><a href="https://mail.proton.me/">Proton</a></li>
                         <li><a href="https://discord.com/app">Discord</a></li>
+                        <li><a href="https://linkedin.com">LinkedIn</a></li>
+                        <li><a href="https://pouet.chapril.org/web/timelines/home">Mastodon</a></li>
+
                     </ul>
                 </div>
             </div>
 
             <div class="col">
                 <div>
-                    <h5> <i class="bi bi-motherboard-fill"></i> Sous le coude</h5>
+                    <h4> <i class="bi bi-motherboard-fill"></i> Sous le coude</h4>
                     <ul>
                         <li><a href="https://www.facebook.com/">Facebook</a></li>
                         <li><a href="http://www.dealabs.com/">Dealabs</a></li>
                         <li><a href="https://www.jeuxvideo.com/">JVC</a></li>
                         <li><a href="https://canardpc.com">CPC</a></li>
                         <li><a href="https://forum.canardpc.com/usercp.php">CPC Forum</a></li>
+                        <li><a href="https://www.vigicrues.gouv.fr/niv2-bassin.php?CdEntVigiCru=3">Vigicures</a></li>
+                       <li><a href="https://jesuislibre.net/moket/">MOKET</a> ou <a href="https://sutom.nocle.fr/#">SUTOM</a> </li>
                     </ul>
                 </div>
             </div>
 
             <div class="col">
                 <div>
-                    <h5> <i class="bi bi-currency-exchange"></i> Argent</h5>
+                    <h4> <i class="bi bi-currency-exchange"></i> Argent</h4>
                     <ul>
                         <li><a href="https://www.creditmutuel.fr/cmo/fr/authentification.html">Cybermut</a></li>
                         <li><a href="https://mabanque.fortuneo.fr/fr/identification.jsp">Fortuneo Espace Client</a></li>
@@ -56,7 +68,7 @@
 
             <div class="col">
                 <div>
-                    <h5> <i class="bi bi-tools"></i> Outils</h5>
+                    <h4> <i class="bi bi-tools"></i> Outils</h4>
                     <ul>
                         <li><a href="https://app.raindrop.io/">Raindrop</a></li>
                         <li><a href="https://rss.pcet.link/i/">FreshRSS</a></li>
@@ -64,27 +76,47 @@
                         <li><a href="https://calendar.google.com/calendar/r">Google Calendar</a></li>
                         <li><a href="https://www.photopea.com/">Photopea</a></li>
                         <li><a href="https://www.youtube.com/">Youtube</a></li>
+                        <li><a href="https://www.deepl.com/translator">Deepl</a></li>
+                        <li><a href="https://www.lofiatc.com/?icao=LFPO">Lo-Fi ATC</a> <span class="badge">LFPO</span></li>
+                        <li><a href="https://mynoise.net/">MyNoise</a></li>
+                        <li><a href="https://privatebin.at/">Private bin</a></li>
+                        <li><a href="https://librespeed.org/">LibreSpeed</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col">
                 <div>
-                    <h5> <i class="bi bi-house"></i> Maison</h5>
+                    <h4> <i class="bi bi-house"></i> Maison</h4>
                     <ul>
                         <li><a href="https://schlagdenicole.quickconnect.to/">NAS</a></li>
                         <li><a href="http://mafreebox.freebox.fr/">Freebox</a></li>
+                        <li><a href="https://www.google.com/search?q=Meteo+Rhinau">Méteo</a></li>
                     </ul>
                 </div>
-            </div>
-
-            <div class="col">
+                <br/>
                 <div>
-                    <h5> <i class="bi bi-building"></i> Travail</h5>
+                    <h4> <i class="bi bi-building"></i> Travail</h4>
                     <ul>
                         <li><a href="https://wurth.p-monitor.com/">Project Monitor</a></li>
                         <li><a href="https://www.office.com/login?es=Click&ru=%2F&msafed=0">Office 365</a></li>
                         <li><a href="https://apps.wurth.fr">APPS</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <h4> <i class="bi bi-building"></i> Dev </h4>
+                    <ul>
+                        <li><a href="https://wurth.p-monitor.com/">Project Monitor</a></li>
+                        <li><a href="https://www.office.com/login?es=Click&ru=%2F&msafed=0">Office 365</a></li>
+                        <li><a href="https://apps.wurth.fr">APPS</a></li>
+                        <li><a href="https://github.com/">GitHub</a></li>
+                        <li><a href="https://www.freeformatter.com/">Outils de devs</a></li>
+                        <li><a href="https://regex101.com/">Regex101</a></li>
+                        <li><a href="https://www.freecodecamp.org/">Freecodecamp</a></li>
                     </ul>
                 </div>
             </div>
@@ -93,10 +125,18 @@
     </main>
 
     <script type="text/javascript">
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        var name = "Allan";        
         setInterval(() => { 
             var date = new Date();
         document.getElementById("horloge").innerHTML = date.toLocaleString("fr-FR");
         }, 1000);        
+        var hi = ["Bonjour","Hallo","Hi","прывітанне","Ciao","Hej","Aloha"];
+        document.getElementById("himessage").innerHTML = `🤌  ${hi[getRandomInt(hi.length)]} ${name} 🍕`;
     </script>
 
 </body>

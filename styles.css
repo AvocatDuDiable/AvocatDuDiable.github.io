@@ -1,0 +1,18 @@
+li {
+  list-style-type: "❇️ ";
+  padding-top: 5px;
+}
+
+li a {
+    font-size: 1.1em;
+    color: var(--bs-body-color);
+    text-decoration: none;
+}
+
+#img-meteo {
+    width: 500px;
+}
+
+#horloge {
+    font-weight: bold;
+}
