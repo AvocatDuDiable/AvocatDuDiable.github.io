@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allan Start page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<style>
+    .list-group-item a {
+        text-decoration: none;
+    }
+</style>
+<body>
+    <main role=main class="container">
+        <h1 class="text-center">Bonjour Allan</h1>
+        <div class="lead text-center text-danger" id="horloge" >Chargement de l'heure ...</div>     
+        <br>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div>
+                    <h5><i class="bi bi-chat-dots-fill"></i> Communication</h5>
+                    <ul>
+                        <li><a href="https://www.messenger.com/">Messenger</a></li>
+                        <li><a href="https://outlook.live.com/">Outlook</a></li>
+                        <li><a href="https://mail.google.com/mail">Gmail</a></li>
+                        <li><a href="https://mail.proton.me/">Proton</a></li>
+                        <li><a href="https://discord.com/app">Discord</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <h5> <i class="bi bi-motherboard-fill"></i> Sous le coude</h5>
+                    <ul>
+                        <li><a href="https://www.facebook.com/">Facebook</a></li>
+                        <li><a href="http://www.dealabs.com/">Dealabs</a></li>
+                        <li><a href="https://www.jeuxvideo.com/">JVC</a></li>
+                        <li><a href="https://canardpc.com">CPC</a></li>
+                        <li><a href="https://forum.canardpc.com/usercp.php">CPC Forum</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <h5> <i class="bi bi-currency-exchange"></i> Argent</h5>
+                    <ul>
+                        <li><a href="https://www.creditmutuel.fr/cmo/fr/authentification.html">Cybermut</a></li>
+                        <li><a href="https://mabanque.fortuneo.fr/fr/identification.jsp">Fortuneo Espace Client</a></li>
+                        <li><a href="https://mabanque.fortuneo.fr/carte-virtuelle/login">Foruneo CB Virtuel</a></li>
+                        <li><a href="https://app.n26.com/login">N26</a></li>
+                        <li><a href="https://www.paypal.com/signin">Paypal</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <h5> <i class="bi bi-tools"></i> Outils</h5>
+                    <ul>
+                        <li><a href="https://app.raindrop.io/">Raindrop</a></li>
+                        <li><a href="https://rss.pcet.link/i/">FreshRSS</a></li>
+                        <li><a href="https://drive.google.com/drive/u/0/my-drive">Google Drive</a></li>
+                        <li><a href="https://calendar.google.com/calendar/r">Google Calendar</a></li>
+                        <li><a href="https://www.photopea.com/">Photopea</a></li>
+                        <li><a href="https://www.youtube.com/">Youtube</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <h5> <i class="bi bi-house"></i> Maison</h5>
+                    <ul>
+                        <li><a href="https://schlagdenicole.quickconnect.to/">NAS</a></li>
+                        <li><a href="http://mafreebox.freebox.fr/">Freebox</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <h5> <i class="bi bi-building"></i> Travail</h5>
+                    <ul>
+                        <li><a href="https://wurth.p-monitor.com/">Project Monitor</a></li>
+                        <li><a href="https://www.office.com/login?es=Click&ru=%2F&msafed=0">Office 365</a></li>
+                        <li><a href="https://apps.wurth.fr">APPS</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script type="text/javascript">
+        setInterval(() => { 
+            var date = new Date();
+        document.getElementById("horloge").innerHTML = date.toLocaleString("fr-FR");
+        }, 1000);        
+    </script>
+
+</body>
+</html>
