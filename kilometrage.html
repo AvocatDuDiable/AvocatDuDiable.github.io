@@ -445,6 +445,63 @@
             cursor: pointer;
         }
 
+        /* Toggle switch pour le mode de saisie */
+        .input-mode-toggle {
+            margin-bottom: 20px;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f7fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .toggle-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.direct-mode {
+            background: #56ab2f;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.direct-mode .toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .mode-description {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
         .entry-category {
             display: inline-block;
             padding: 4px 12px;
@@ -609,22 +666,24 @@
                             <button onclick="addCustomCategory()">Ajouter</button>
                         </div>
                     </div>
+
+                    <!-- Toggle pour le mode de saisie -->
+                    <div class="toggle-container">
+                        <div>
+                            <div class="toggle-label" id="modeLabel">Depuis compteur global</div>
+                            <div class="mode-description" id="modeDescription">La différence avec le total actuel sera ajoutée</div>
+                        </div>
+                        <div class="toggle-switch" id="modeToggle" onclick="toggleInputMode()">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
                     
-                    <!-- Mode Global -->
+                    <!-- Input unique -->
                     <div class="form-group">
-                        <label for="globalKm">Depuis le compteur global</label>
-                        <input type="number" id="globalKm" placeholder="Ex: 45350" step="0.1">
+                        <label for="kmInput" id="inputLabel">Kilométrage (km)</label>
+                        <input type="number" id="kmInput" placeholder="Ex: 45350" step="0.1">
                     </div>
-                    <button class="btn btn-primary" onclick="addFromGlobal()">Ajouter (différence calculée)</button>
-
-                    <div style="text-align: center; margin: 20px 0; color: #999; font-weight: 600;">OU</div>
-
-                    <!-- Mode Direct -->
-                    <div class="form-group">
-                        <label for="directKm">Distance parcourue directement</label>
-                        <input type="number" id="directKm" placeholder="Ex: 30.5" step="0.1">
-                    </div>
-                    <button class="btn btn-secondary" onclick="addDirect()">Ajouter (distance directe)</button>
+                    <button class="btn btn-primary" id="addButton" onclick="addKilometrage()">Ajouter</button>
                 </div>
             </div>
         </div>
@@ -656,6 +715,7 @@
         let pendingAction = null;
         let categories = ['Professionnel', 'Loisirs', 'Voyages'];
         let selectedCategory = null;
+        let inputMode = 'global'; // 'global' ou 'direct'
 
         // Gestion des modales
         function showError(message) {
@@ -757,16 +817,58 @@
             renderCategoryButtons();
         }
 
+        // Gestion du mode de saisie
+        function toggleInputMode() {
+            inputMode = inputMode === 'global' ? 'direct' : 'global';
+            updateModeUI();
+            saveData();
+        }
+
+        function updateModeUI() {
+            const toggle = document.getElementById('modeToggle');
+            const label = document.getElementById('modeLabel');
+            const description = document.getElementById('modeDescription');
+            const inputLabel = document.getElementById('inputLabel');
+            const input = document.getElementById('kmInput');
+            const button = document.getElementById('addButton');
+
+            if (inputMode === 'global') {
+                toggle.classList.remove('direct-mode');
+                label.textContent = 'Depuis compteur global';
+                description.textContent = 'La différence avec le total actuel sera ajoutée';
+                inputLabel.textContent = 'Kilométrage du compteur (km)';
+                input.placeholder = 'Ex: 45350';
+                button.className = 'btn btn-primary';
+            } else {
+                toggle.classList.add('direct-mode');
+                label.textContent = 'Distance directe';
+                description.textContent = 'La distance sera ajoutée directement au total';
+                inputLabel.textContent = 'Distance parcourue (km)';
+                input.placeholder = 'Ex: 30.5';
+                button.className = 'btn btn-secondary';
+            }
+        }
+
+        function addKilometrage() {
+            if (inputMode === 'global') {
+                addFromGlobal();
+            } else {
+                addDirect();
+            }
+        }
+
         // Charger les données au démarrage
         function loadData() {
             const savedRef = localStorage.getItem('referenceKm');
             const savedEntries = localStorage.getItem('entries');
             const savedCategories = localStorage.getItem('categories');
+            const savedInputMode = localStorage.getItem('inputMode');
             
             if (savedRef) {
                 referenceKm = parseFloat(savedRef);
                 entries = savedEntries ? JSON.parse(savedEntries) : [];
                 categories = savedCategories ? JSON.parse(savedCategories) : ['Professionnel', 'Loisirs', 'Voyages'];
+                inputMode = savedInputMode || 'global';
                 showMainScreen();
             } else {
                 showInitScreen();
@@ -778,6 +880,7 @@
             localStorage.setItem('referenceKm', referenceKm);
             localStorage.setItem('entries', JSON.stringify(entries));
             localStorage.setItem('categories', JSON.stringify(categories));
+            localStorage.setItem('inputMode', inputMode);
         }
 
         // Afficher l'écran d'initialisation
@@ -793,6 +896,7 @@
             document.getElementById('mainScreen').classList.remove('hidden');
             document.getElementById('subtitle').textContent = 'Ajoutez vos trajets facilement';
             renderCategoryButtons();
+            updateModeUI();
             updateDisplay();
         }
 
@@ -813,7 +917,7 @@
 
         // Ajouter depuis le compteur global
         function addFromGlobal() {
-            const input = document.getElementById('globalKm');
+            const input = document.getElementById('kmInput');
             const value = parseFloat(input.value);
             
             if (isNaN(value) || value < 0) {
@@ -855,7 +959,7 @@
 
         // Ajouter une distance directe
         function addDirect() {
-            const input = document.getElementById('directKm');
+            const input = document.getElementById('kmInput');
             const value = parseFloat(input.value);
             
             if (isNaN(value) || value <= 0) {
