@@ -614,6 +614,11 @@
         document.getElementById('confirmModal').addEventListener('click', closeModal);
         document.getElementById('errorModal').addEventListener('click', closeModal);
 
+        // Formater les nombres avec séparateur de milliers
+        function formatKm(value) {
+            return value.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
         // Gestion des catégories
         function renderCategoryButtons() {
             const container = document.getElementById('categoryButtons');
@@ -855,10 +860,10 @@
             const totalDistance = entries.reduce((sum, e) => sum + e.distance, 0);
             const currentTotal = referenceKm + totalDistance;
             
-            document.getElementById('referenceKm').innerHTML = `${currentTotal.toFixed(1)} <span>km</span>`;
+            document.getElementById('referenceKm').innerHTML = `${formatKm(currentTotal)} <span>km</span>`;
 
             // Statistiques
-            document.getElementById('totalDistance').textContent = totalDistance.toFixed(1) + ' km';
+            document.getElementById('totalDistance').textContent = formatKm(totalDistance) + ' km';
             document.getElementById('entryCount').textContent = entries.length;
 
             // Statistiques par mois
@@ -896,7 +901,7 @@
                     .sort((a, b) => b[0].localeCompare(a[0])) // Tri par mois décroissant
                     .forEach(([key, data]) => {
                         const categoryDetails = Object.entries(data.categories)
-                            .map(([cat, dist]) => `${cat}: ${dist.toFixed(1)} km`)
+                            .map(([cat, dist]) => `${cat}: ${formatKm(dist)} km`)
                             .join(' • ');
 
                         const statDiv = document.createElement('div');
@@ -904,7 +909,7 @@
                         statDiv.innerHTML = `
                             <div class="month-stat-header">
                                 <div class="month-stat-name">${data.name}</div>
-                                <div class="month-stat-value">${data.distance.toFixed(1)} km</div>
+                                <div class="month-stat-value">${formatKm(data.distance)} km</div>
                             </div>
                             <div class="month-stat-details">
                                 ${data.count} trajet${data.count > 1 ? 's' : ''}
@@ -938,7 +943,7 @@
                         statDiv.className = 'category-stat';
                         statDiv.innerHTML = `
                             <div class="category-stat-name">${cat}</div>
-                            <div class="category-stat-value">${distance.toFixed(1)} km</div>
+                            <div class="category-stat-value">${formatKm(distance)} km</div>
                         `;
                         categoryStatsList.appendChild(statDiv);
                     });
@@ -968,8 +973,8 @@
 
                 let typeLabel = entry.type === 'global' ? 'Depuis compteur' : 'Distance directe';
                 let details = entry.type === 'global' 
-                    ? `Compteur: ${entry.globalKm.toFixed(1)} km → +${entry.distance.toFixed(1)} km`
-                    : `+${entry.distance.toFixed(1)} km`;
+                    ? `Compteur: ${formatKm(entry.globalKm)} km → +${formatKm(entry.distance)} km`
+                    : `+${formatKm(entry.distance)} km`;
 
                 const categoryTag = entry.category ? `<div class="entry-category">${entry.category}</div>` : '';
 
@@ -981,7 +986,7 @@
                         ${categoryTag}
                         <div class="entry-type">${typeLabel}</div>
                         <div class="entry-details">${details}</div>
-                        <div class="entry-km">Total: ${entry.totalKm.toFixed(1)} km</div>
+                        <div class="entry-km">Total: ${formatKm(entry.totalKm)} km</div>
                     </div>
                     <button class="btn-delete" onclick="deleteEntry(${actualIndex})">✕</button>
                 `;
