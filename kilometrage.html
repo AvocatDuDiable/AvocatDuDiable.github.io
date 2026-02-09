@@ -313,6 +313,149 @@
             border-left: 4px solid #c00;
             font-size: 16px;
         }
+
+        /* Catégories */
+        .category-selector {
+            margin-bottom: 20px;
+        }
+
+        .category-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .category-btn.add-new {
+            border-color: #56ab2f;
+            color: #56ab2f;
+        }
+
+        .category-btn.add-new.selected {
+            background: #56ab2f;
+            color: white;
+        }
+
+        .custom-category-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .custom-category-input input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .custom-category-input button {
+            padding: 12px 20px;
+            background: #56ab2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .entry-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .stats-by-category {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .category-stat {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .category-stat-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .category-stat-value {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        /* Statistiques mensuelles */
+        .stats-by-month {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .month-stat {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .month-stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .month-stat-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .month-stat-value {
+            font-weight: 700;
+            color: #764ba2;
+            font-size: 18px;
+        }
+
+        .month-stat-details {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -350,6 +493,16 @@
             <div class="card">
                 <h2>➕ Ajouter un kilométrage</h2>
                 
+                <!-- Sélecteur de catégorie -->
+                <div class="category-selector">
+                    <label>Catégorie (optionnel)</label>
+                    <div class="category-buttons" id="categoryButtons"></div>
+                    <div class="custom-category-input hidden" id="customCategoryInput">
+                        <input type="text" id="newCategoryName" placeholder="Nom de la catégorie">
+                        <button onclick="addCustomCategory()">Ajouter</button>
+                    </div>
+                </div>
+                
                 <!-- Mode Global -->
                 <div class="form-group">
                     <label for="globalKm">Depuis le compteur global</label>
@@ -379,6 +532,18 @@
                         <div class="stat-label">Nombre de trajets</div>
                         <div class="stat-value" id="entryCount">0</div>
                     </div>
+                </div>
+
+                <!-- Statistiques par mois -->
+                <div class="stats-by-month" id="statsByMonth">
+                    <h3 style="color: #667eea; margin-bottom: 15px; font-size: 1.2em;">Par mois</h3>
+                    <div id="monthStatsList"></div>
+                </div>
+
+                <!-- Statistiques par catégorie -->
+                <div class="stats-by-category" id="statsByCategory">
+                    <h3 style="color: #667eea; margin-bottom: 15px; font-size: 1.2em;">Par catégorie</h3>
+                    <div id="categoryStatsList"></div>
                 </div>
             </div>
 
@@ -415,6 +580,8 @@
         let referenceKm = null;
         let entries = [];
         let pendingAction = null;
+        let categories = ['Professionnel', 'Loisirs', 'Voyages'];
+        let selectedCategory = null;
 
         // Gestion des modales
         function showError(message) {
@@ -447,14 +614,80 @@
         document.getElementById('confirmModal').addEventListener('click', closeModal);
         document.getElementById('errorModal').addEventListener('click', closeModal);
 
+        // Gestion des catégories
+        function renderCategoryButtons() {
+            const container = document.getElementById('categoryButtons');
+            container.innerHTML = '';
+
+            // Bouton "Aucune"
+            const noneBtn = document.createElement('button');
+            noneBtn.className = 'category-btn' + (selectedCategory === null ? ' selected' : '');
+            noneBtn.textContent = 'Aucune';
+            noneBtn.onclick = () => selectCategory(null);
+            container.appendChild(noneBtn);
+
+            // Boutons des catégories existantes
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'category-btn' + (selectedCategory === cat ? ' selected' : '');
+                btn.textContent = cat;
+                btn.onclick = () => selectCategory(cat);
+                container.appendChild(btn);
+            });
+
+            // Bouton "Ajouter"
+            const addBtn = document.createElement('button');
+            addBtn.className = 'category-btn add-new';
+            addBtn.textContent = '+ Ajouter';
+            addBtn.onclick = toggleCustomCategoryInput;
+            container.appendChild(addBtn);
+        }
+
+        function selectCategory(category) {
+            selectedCategory = category;
+            renderCategoryButtons();
+        }
+
+        function toggleCustomCategoryInput() {
+            const input = document.getElementById('customCategoryInput');
+            input.classList.toggle('hidden');
+            if (!input.classList.contains('hidden')) {
+                document.getElementById('newCategoryName').focus();
+            }
+        }
+
+        function addCustomCategory() {
+            const input = document.getElementById('newCategoryName');
+            const value = input.value.trim();
+
+            if (!value) {
+                showError('Veuillez saisir un nom de catégorie');
+                return;
+            }
+
+            if (categories.includes(value)) {
+                showError('Cette catégorie existe déjà');
+                return;
+            }
+
+            categories.push(value);
+            selectedCategory = value;
+            input.value = '';
+            document.getElementById('customCategoryInput').classList.add('hidden');
+            saveData();
+            renderCategoryButtons();
+        }
+
         // Charger les données au démarrage
         function loadData() {
             const savedRef = localStorage.getItem('referenceKm');
             const savedEntries = localStorage.getItem('entries');
+            const savedCategories = localStorage.getItem('categories');
             
             if (savedRef) {
                 referenceKm = parseFloat(savedRef);
                 entries = savedEntries ? JSON.parse(savedEntries) : [];
+                categories = savedCategories ? JSON.parse(savedCategories) : ['Professionnel', 'Loisirs', 'Voyages'];
                 showMainScreen();
             } else {
                 showInitScreen();
@@ -465,6 +698,7 @@
         function saveData() {
             localStorage.setItem('referenceKm', referenceKm);
             localStorage.setItem('entries', JSON.stringify(entries));
+            localStorage.setItem('categories', JSON.stringify(categories));
         }
 
         // Afficher l'écran d'initialisation
@@ -479,6 +713,7 @@
             document.getElementById('initScreen').classList.add('hidden');
             document.getElementById('mainScreen').classList.remove('hidden');
             document.getElementById('subtitle').textContent = 'Ajoutez vos trajets facilement';
+            renderCategoryButtons();
             updateDisplay();
         }
 
@@ -528,10 +763,13 @@
                 type: 'global',
                 globalKm: value,
                 distance: distance,
-                totalKm: currentTotal + distance
+                totalKm: currentTotal + distance,
+                category: selectedCategory
             });
 
             input.value = '';
+            selectedCategory = null;
+            renderCategoryButtons();
             saveData();
             updateDisplay();
         }
@@ -552,10 +790,13 @@
                 date: new Date().toISOString(),
                 type: 'direct',
                 distance: value,
-                totalKm: currentTotal + value
+                totalKm: currentTotal + value,
+                category: selectedCategory
             });
 
             input.value = '';
+            selectedCategory = null;
+            renderCategoryButtons();
             saveData();
             updateDisplay();
         }
@@ -620,6 +861,91 @@
             document.getElementById('totalDistance').textContent = totalDistance.toFixed(1) + ' km';
             document.getElementById('entryCount').textContent = entries.length;
 
+            // Statistiques par mois
+            const monthStats = {};
+            entries.forEach(entry => {
+                const date = new Date(entry.date);
+                const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                const monthName = date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' });
+                
+                if (!monthStats[monthKey]) {
+                    monthStats[monthKey] = {
+                        name: monthName,
+                        distance: 0,
+                        count: 0,
+                        categories: {}
+                    };
+                }
+                
+                monthStats[monthKey].distance += entry.distance;
+                monthStats[monthKey].count += 1;
+                
+                if (entry.category) {
+                    if (!monthStats[monthKey].categories[entry.category]) {
+                        monthStats[monthKey].categories[entry.category] = 0;
+                    }
+                    monthStats[monthKey].categories[entry.category] += entry.distance;
+                }
+            });
+
+            const monthStatsList = document.getElementById('monthStatsList');
+            monthStatsList.innerHTML = '';
+
+            if (Object.keys(monthStats).length > 0) {
+                Object.entries(monthStats)
+                    .sort((a, b) => b[0].localeCompare(a[0])) // Tri par mois décroissant
+                    .forEach(([key, data]) => {
+                        const categoryDetails = Object.entries(data.categories)
+                            .map(([cat, dist]) => `${cat}: ${dist.toFixed(1)} km`)
+                            .join(' • ');
+
+                        const statDiv = document.createElement('div');
+                        statDiv.className = 'month-stat';
+                        statDiv.innerHTML = `
+                            <div class="month-stat-header">
+                                <div class="month-stat-name">${data.name}</div>
+                                <div class="month-stat-value">${data.distance.toFixed(1)} km</div>
+                            </div>
+                            <div class="month-stat-details">
+                                ${data.count} trajet${data.count > 1 ? 's' : ''}
+                                ${categoryDetails ? ' • ' + categoryDetails : ''}
+                            </div>
+                        `;
+                        monthStatsList.appendChild(statDiv);
+                    });
+            } else {
+                monthStatsList.innerHTML = '<div class="no-data" style="padding: 20px;">Aucune donnée mensuelle</div>';
+            }
+
+            // Statistiques par catégorie
+            const categoryStats = {};
+            entries.forEach(entry => {
+                const cat = entry.category || 'Sans catégorie';
+                if (!categoryStats[cat]) {
+                    categoryStats[cat] = 0;
+                }
+                categoryStats[cat] += entry.distance;
+            });
+
+            const categoryStatsList = document.getElementById('categoryStatsList');
+            categoryStatsList.innerHTML = '';
+
+            if (Object.keys(categoryStats).length > 0) {
+                Object.entries(categoryStats)
+                    .sort((a, b) => b[1] - a[1])
+                    .forEach(([cat, distance]) => {
+                        const statDiv = document.createElement('div');
+                        statDiv.className = 'category-stat';
+                        statDiv.innerHTML = `
+                            <div class="category-stat-name">${cat}</div>
+                            <div class="category-stat-value">${distance.toFixed(1)} km</div>
+                        `;
+                        categoryStatsList.appendChild(statDiv);
+                    });
+            } else {
+                categoryStatsList.innerHTML = '<div class="no-data" style="padding: 20px;">Aucune donnée par catégorie</div>';
+            }
+
             // Historique
             const historyList = document.getElementById('historyList');
             historyList.innerHTML = '';
@@ -645,11 +971,14 @@
                     ? `Compteur: ${entry.globalKm.toFixed(1)} km → +${entry.distance.toFixed(1)} km`
                     : `+${entry.distance.toFixed(1)} km`;
 
+                const categoryTag = entry.category ? `<div class="entry-category">${entry.category}</div>` : '';
+
                 const entryDiv = document.createElement('div');
                 entryDiv.className = `entry type-${entry.type}`;
                 entryDiv.innerHTML = `
                     <div class="entry-info">
                         <div class="entry-date">${dateStr}</div>
+                        ${categoryTag}
                         <div class="entry-type">${typeLabel}</div>
                         <div class="entry-details">${details}</div>
                         <div class="entry-km">Total: ${entry.totalKm.toFixed(1)} km</div>
