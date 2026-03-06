@@ -1,155 +1,690 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="./favicon.ico">
-    <title>Allan Start page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./styles.css"/>
-</head>
-<body>
-    <main role=main class="container">
-        <h1 class="text-center" id="himessage"> Hi message</h1>
-        <div class="lead text-center text-danger"> ⏰ <span id="horloge">Chargement de l'heure ...</span></div>     
-        <br>
-        <form class="card" action="https://google.fr/search" method="get" target="_blank">
-            <input class="search-bar form-control" type="text" 
-            autocomplete="off" autofocus="" placeholder="Recherche Google" name="q" 
-            alt="Recherche Google">
-        </form>
-        <br>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div>
-                    <h4><i class="bi bi-chat-dots-fill"></i> Communication</h4>
-                    <ul>
-                        <li><a href="https://www.messenger.com/">Messenger</a></li>
-                        <li><a href="https://outlook.live.com/">Outlook</a></li>
-                        <li><a href="https://mail.proton.me/">Proton</a></li>
-                        <li><a href="https://discord.com/app">Discord</a></li>
-                        <li><a href="https://linkedin.com">LinkedIn</a></li>
-                        <li><a href="https://www.facebook.com/">Facebook</a></li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <div class="col">
-                <div>
-                    <h4> <i class="bi bi-backpack2-fill"></i> Liens</h4>
-                    <ul>
-                        
-                        <li><a href="http://www.dealabs.com/">Dealabs</a></li>
-                        <li><a href="https://canardpc.com">CPC</a></li>
-                        <li><a href="https://forum.canardpc.com/usercp.php">CPC Forum</a></li>
-                       <li><a href="https://jesuislibre.net/moket/">MOKET</a> ou <a href="https://sutom.nocle.fr/#">SUTOM</a> </li>
-                        <li><a href="https://claude.ai/new">Claude (IA)</a> </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col">
-                <div>
-                    <h4> <i class="bi bi-boombox-fill"></i> Musique</h4>
-                    <ul>
-                        <li><a href="https://open.spotify.com/intl-fr">Spotify</a></li>
-                        <li><a href="https://coderadio.freecodecamp.org/">Code Radio</a>   <a href="https://coderadio-admin-v2.freecodecamp.org/listen/coderadio/radio.mp3" target="_blank"><span class="badge rounded-pill text-bg-success"> ALT </span></a></li>
-                        <li><a href="https://www.allradio.net/category/1068">Radios sans pub</a></li>
-                        <li><a href="https://www.funradio.fr/">Fun Radio</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            
-            <div class="col">
-                <div>
-                    <h4> <i class="bi bi-tools"></i> Outils</h4>
-                    <ul>
-                        
-                        <li><a href="https://rss.pcet.link/i/">FreshRSS</a></li>
-                        <li><a href="https://www.photopea.com/">Photopea</a></li>
-                        <li><a href="https://www.deepl.com/translator">Deepl</a></li>
-                        <li><a href="https://privatebin.at/">Private bin</a></li>
-                        <li><a href="https://librespeed.org/">LibreSpeed</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col">
-                <div>
-                    <h4> <i class="bi bi-tools"></i> Google</h4>
-                    <ul>
-                        <li><a href="https://www.youtube.com/">Youtube</a></li>
-                        <li><a href="https://calendar.google.com/calendar/r">Agenda</a></li>
-                        <li><a href="https://mail.google.com/mail">Gmail</a></li>
-                        <li><a href="https://drive.google.com/drive/u/0/my-drive">Drive</a></li>
-                        <li><a href="https://maps.google.com">Maps</a></li>
-                    </ul>
-                    <br>
-                    <h4> <i class="bi bi-currency-exchange"></i> Argent</h4>
-                    <ul>
-                        <li><a href="https://www.creditmutuel.fr/cmo/fr/authentification.html">Cybermut</a></li>
-                        <li><a href="https://mabanque.fortuneo.fr/fr/identification.jsp">Fortuneo Espace Client</a></li>
-                        <li><a href="https://mabanque.fortuneo.fr/carte-virtuelle/login">Foruneo CB Virtuel</a></li>
-                        <li><a href="https://app.n26.com/login">N26</a></li>
-                        <li><a href="https://www.paypal.com/signin">Paypal</a></li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <div class="col">
-                <div>
-                    <h4> <i class="bi bi-house"></i> Maison</h4>
-                    <ul>
-                        <li><a href="https://schlagdenicole.quickconnect.to/">NAS</a></li>
-                        <li><a href="http://mafreebox.freebox.fr/">Freebox</a></li>
-                        <li><a href="https://www.google.com/search?q=Meteo+Rhinau">Méteo</a></li>
-                        <li><a href="https://www.ygg.re/">YGG</a></li>
-                        <li><a href="https://alldebrid.fr/">AllDebrid</a></li>
-                    </ul>
-                </div>
-                <br/>
-                <div>
-                    <h4> <i class="bi bi-building"></i> Travail</h4>
-                    <ul>
-                        <li><a href="https://www.office.com/login?es=Click&ru=%2F&msafed=0">Office 365</a></li>
-
-                    </ul>
-                </div>
-                <br/>
-                <div>
-                    <h4> <i class="bi bi-building"></i> Dev </h4>
-                    <ul>
-                        <li><a href="https://github.com/">GitHub</a></li>
-                        <li><a href="https://www.freeformatter.com/">Outils de devs</a></li>
-                        <li><a href="https://regex101.com/">Regex101</a></li>
-                        <li><a href="https://www.freecodecamp.org/">Freecodecamp</a></li>
-                        <li><a href="./kilometrage.html">Kilométrage (Claude)</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div>
-    </main>
-
-    <script type="text/javascript">
-
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
+    <title>Allan — Start</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        var name = "Allan";        
-        setInterval(() => { 
-            var date = new Date();
-        document.getElementById("horloge").innerHTML = date.toLocaleString("fr-FR");
-        }, 1000);        
-        var hi = ["Bonjour","Hallo","Hi","прывітанне","Ciao","Hej","Aloha"];
-        document.getElementById("himessage").innerHTML = `🤌  ${hi[getRandomInt(hi.length)]} ${name} 🍕`;
-    </script>
+        :root {
+            --bg: #f5f5f7;
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface-hover: rgba(255, 255, 255, 0.92);
+            --border: rgba(0, 0, 0, 0.08);
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --text-tertiary: #aeaeb2;
+            --accent: #0071e3;
+            --accent-hover: #0077ed;
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
 
+        [data-theme="dark"] {
+            --bg: #161617;
+            --surface: rgba(38, 38, 40, 0.80);
+            --surface-hover: rgba(50, 50, 52, 0.95);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --text-tertiary: #6e6e73;
+            --accent: #2997ff;
+            --accent-hover: #47a8ff;
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.30), 0 1px 4px rgba(0, 0, 0, 0.20);
+            --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.40), 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        [data-theme="dark"] body::before {
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(41, 151, 255, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(41, 151, 255, 0.04) 0%, transparent 60%);
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 48px 24px 64px;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, box-shadow 0.2s, transform 0.2s, border-color 0.3s;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .theme-toggle:hover {
+            box-shadow: var(--shadow-hover);
+            transform: scale(1.08);
+        }
+
+        .theme-toggle .icon-sun  { display: block; }
+        .theme-toggle .icon-moon { display: none;  }
+
+        [data-theme="dark"] .theme-toggle .icon-sun  { display: none;  }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+
+        /* Subtle background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0, 113, 227, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0, 113, 227, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeDown 0.6s ease both;
+        }
+
+        .greeting {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+
+        .clock {
+            margin-top: 8px;
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-tertiary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Search row */
+        .search-wrap {
+            margin-bottom: 40px;
+            animation: fadeDown 0.6s 0.1s ease both;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            position: relative;
+            z-index: 500;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s, border-color 0.2s, background 0.3s;
+        }
+
+        .search-form:focus-within {
+            box-shadow: var(--shadow-hover), 0 0 0 3px rgba(0, 113, 227, 0.15);
+            border-color: rgba(0, 113, 227, 0.3);
+        }
+
+        .search-icon {
+            color: var(--text-tertiary);
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 14px 0;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        /* Quick search dropdown */
+        .quick-search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .quick-search-form {
+            display: flex;
+            align-items: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s, border-color 0.2s, background 0.3s;
+        }
+
+        .quick-search-form:focus-within {
+            box-shadow: var(--shadow-hover), 0 0 0 3px rgba(0, 113, 227, 0.15);
+            border-color: rgba(0, 113, 227, 0.3);
+        }
+
+        .quick-search-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 14px 0;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .quick-search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .quick-results {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow-hover);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            overflow: hidden;
+            z-index: 1000;
+            display: none;
+        }
+
+        .quick-results.visible {
+            display: block;
+        }
+
+        .quick-result-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background 0.12s;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.93rem;
+        }
+
+        .quick-result-item:hover,
+        .quick-result-item.active {
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--accent);
+        }
+
+        .quick-result-item .result-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .quick-result-item .result-category {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .quick-no-result {
+            padding: 12px 16px;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .search-wrap { flex-direction: column; }
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Card */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.3s ease, border-color 0.3s ease;
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+            background: var(--surface-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        .card-title {
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+
+        /* Link list */
+        .link-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .link-list li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.93rem;
+            font-weight: 400;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .link-list li a:hover {
+            background: rgba(0, 113, 227, 0.07);
+            color: var(--accent);
+        }
+
+        .link-list li a .badge {
+            font-size: 0.65rem;
+            font-weight: 500;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(0, 113, 227, 0.1);
+            color: var(--accent);
+            letter-spacing: 0.04em;
+        }
+
+        /* Animations */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            body { padding: 32px 16px 48px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<button class="theme-toggle" id="themeToggle" title="Changer de thème">
+    <span class="icon-sun">☀️</span>
+    <span class="icon-moon">🌙</span>
+</button>
+<div class="container">
+
+    <header class="header">
+        <div class="greeting" id="himessage"></div>
+        <div class="clock" id="horloge"></div>
+    </header>
+
+    <div class="search-wrap">
+        <!-- Recherche rapide parmi les liens -->
+        <div class="quick-search-box">
+            <div class="quick-search-form">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+                <input class="quick-search-input" id="quickInput" type="text" autocomplete="off" autofocus placeholder="Accès rapide…">
+            </div>
+            <div class="quick-results" id="quickResults"></div>
+        </div>
+
+        <!-- Recherche Google -->
+        <div class="search-box">
+            <form class="search-form" action="https://google.fr/search" method="get" target="_blank">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input class="search-input" type="text" name="q" autocomplete="off" placeholder="Rechercher sur Google…">
+            </form>
+        </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+</div>
+
+<script>
+// ============================================================
+//  ✏️  CONFIGURATION — Modifiez cette section pour ajouter,
+//  supprimer ou réorganiser des liens.
+//
+//  Structure d'une catégorie :
+//  {
+//    icon: "emoji",
+//    title: "Nom de la section",
+//    links: [
+//      { label: "Nom affiché", url: "https://..." },
+//      { label: "Nom", url: "https://...", badge: "TEXTE" }, // badge optionnel
+//    ]
+//  }
+// ============================================================
+
+const CATEGORIES = [
+    {
+        icon: "💬",
+        title: "Communication",
+        links: [
+            { label: "Messenger",  url: "https://www.messenger.com/" },
+            { label: "Outlook",    url: "https://outlook.live.com/" },
+            { label: "Proton",     url: "https://mail.proton.me/" },
+            { label: "Discord",    url: "https://discord.com/app" },
+            { label: "LinkedIn",   url: "https://linkedin.com" },
+            { label: "Facebook",   url: "https://www.facebook.com/" },
+        ]
+    },
+    {
+        icon: "🔗",
+        title: "Liens",
+        links: [
+            { label: "Dealabs",    url: "http://www.dealabs.com/" },
+            { label: "MOKET",      url: "https://jesuislibre.net/moket/" },
+            { label: "SUTOM",      url: "https://sutom.nocle.fr/#" },
+            { label: "Claude (IA)",url: "https://claude.ai/new" },
+            { label: "ICloud",     url: "https://www.icloud.com/fr-fr" },
+        ]
+    },
+    {
+        icon: "🎵",
+        title: "Musique",
+        links: [
+            { label: "Spotify",          url: "https://open.spotify.com/intl-fr" },
+            { label: "Code Radio",       url: "https://coderadio.freecodecamp.org/", badge: "MP3" },
+            { label: "Radios sans pub",  url: "https://www.allradio.net/category/1068" },
+            { label: "Fun Radio",        url: "https://www.funradio.fr/" },
+        ]
+    },
+    {
+        icon: "🛠",
+        title: "Outils",
+        links: [
+            { label: "FreshRSS",     url: "https://rss.pcet.link/i/" },
+            { label: "Photopea",     url: "https://www.photopea.com/" },
+            { label: "DeepL",        url: "https://www.deepl.com/translator" },
+            { label: "Private Bin",  url: "https://privatebin.at/" },
+            { label: "LibreSpeed",   url: "https://librespeed.org/" },
+        ]
+    },
+    {
+        icon: "🔵",
+        title: "Google",
+        links: [
+            { label: "YouTube",  url: "https://www.youtube.com/" },
+            { label: "Agenda",   url: "https://calendar.google.com/calendar/r" },
+            { label: "Gmail",    url: "https://mail.google.com/mail" },
+            { label: "Drive",    url: "https://drive.google.com/drive/u/0/my-drive" },
+            { label: "Maps",     url: "https://maps.google.com" },
+        ]
+    },
+    {
+        icon: "💶",
+        title: "Argent",
+        links: [
+            { label: "Cybermut",          url: "https://www.creditmutuel.fr/cmo/fr/authentification.html" },
+            { label: "Fortuneo",          url: "https://mabanque.fortuneo.fr/fr/identification.jsp" },
+            { label: "Fortuneo CB Virt.", url: "https://mabanque.fortuneo.fr/carte-virtuelle/login" },
+            { label: "N26",               url: "https://app.n26.com/login" },
+            { label: "PayPal",            url: "https://www.paypal.com/signin" },
+        ]
+    },
+    {
+        icon: "🏠",
+        title: "Maison",
+        links: [
+            { label: "NAS",       url: "http://nas:5000/" },
+            { label: "C411",       url: "https://c411.org/" },
+            { label: "AllDebrid", url: "https://alldebrid.fr/" },
+            { label: "Logitech RS50 Games Settings",   url: "https://support.logi.com/hc/en-gb/articles/34742210613655-Logitech-RS50-Racing-Wheel-Game-Compatibility-List-and-In-Game-Settings#h_01HBWQV43NBYPTYV8PTPVZ1CY1" },
+            { label: "IRacing Week Planner",   url: "https://iracing-week-planner.tmo.lol/" },
+            { label: "Freebox",   url: "http://mafreebox.freebox.fr/" },
+            { label: "Météo",     url: "https://www.google.com/search?q=Meteo+Rhinau" },
+            { label: "YGG",       url: "https://www.yggtorrent.org/" },
+        ]
+    },
+    {
+        icon: "💻",
+        title: "Dev",
+        links: [
+            { label: "GitHub",        url: "https://github.com/" },
+            { label: "Outils de dev", url: "https://www.freeformatter.com/" },
+            { label: "Regex101",      url: "https://regex101.com/" },
+            { label: "FreeCodeCamp",  url: "https://www.freecodecamp.org/" },
+            { label: "Kilométrage",   url: "./kilometrage.html" },
+        ]
+    },
+    {
+        icon: "🏢",
+        title: "Travail",
+        links: [
+            { label: "Office 365", url: "https://www.office.com/login?es=Click&ru=%2F&msafed=0" },
+        ]
+    },
+];
+
+// ============================================================
+//  Thème clair / sombre — mémorisé dans localStorage
+// ============================================================
+
+const root = document.documentElement;
+const toggleBtn = document.getElementById('themeToggle');
+
+// Applique le thème sauvegardé, ou suit la préférence système
+const savedTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (savedTheme) {
+    root.setAttribute('data-theme', savedTheme);
+} else if (prefersDark) {
+    root.setAttribute('data-theme', 'dark');
+}
+
+toggleBtn.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+});
+
+
+
+// ============================================================
+//  Rendu — Ne pas modifier en dessous sauf si vous savez 
+//  ce que vous faites 🙂
+// ============================================================
+
+const grid = document.getElementById('grid');
+
+CATEGORIES.forEach((cat, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.animationDelay = `${i * 0.05}s`;
+
+    const links = cat.links.map(l => {
+        const badge = l.badge ? `<span class="badge">${l.badge}</span>` : '';
+        return `<li><a href="${l.url}" target="_blank">${l.label}${badge}</a></li>`;
+    }).join('');
+
+    card.innerHTML = `
+        <div class="card-header">
+            <span class="card-icon">${cat.icon}</span>
+            <span class="card-title">${cat.title}</span>
+        </div>
+        <ul class="link-list">${links}</ul>
+    `;
+    grid.appendChild(card);
+});
+
+// ============================================================
+//  Accès rapide — recherche parmi tous les liens
+// ============================================================
+
+const ALL_LINKS = CATEGORIES.flatMap(cat =>
+    cat.links.map(l => ({ label: l.label, url: l.url, icon: cat.icon, category: cat.title }))
+);
+
+const quickInput   = document.getElementById('quickInput');
+const quickResults = document.getElementById('quickResults');
+let activeIndex = -1;
+
+function getMatches(query) {
+    if (!query.trim()) return [];
+    const q = query.toLowerCase();
+    return ALL_LINKS.filter(l => l.label.toLowerCase().includes(q)).slice(0, 7);
+}
+
+function renderResults(matches) {
+    activeIndex = -1;
+    if (matches.length === 0) {
+        quickResults.innerHTML = '<div class="quick-no-result">Aucun résultat</div>';
+    } else {
+        quickResults.innerHTML = matches.map((m, i) =>
+            `<a class="quick-result-item" href="${m.url}" target="_blank" data-index="${i}">
+                <span class="result-icon">${m.icon}</span>
+                <span>${m.label}</span>
+                <span class="result-category">${m.category}</span>
+            </a>`
+        ).join('');
+    }
+    quickResults.classList.add('visible');
+}
+
+function hideResults() {
+    quickResults.classList.remove('visible');
+    activeIndex = -1;
+}
+
+quickInput.addEventListener('input', () => {
+    if (quickInput.value.trim() === '') { hideResults(); return; }
+    renderResults(getMatches(quickInput.value));
+});
+
+quickInput.addEventListener('keydown', e => {
+    const items = quickResults.querySelectorAll('.quick-result-item');
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = Math.min(activeIndex + 1, items.length - 1);
+        items.forEach((el, i) => el.classList.toggle('active', i === activeIndex));
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, 0);
+        items.forEach((el, i) => el.classList.toggle('active', i === activeIndex));
+    } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const target = activeIndex >= 0 ? items[activeIndex] : items[0];
+        if (target) { window.open(target.href, '_blank'); quickInput.value = ''; hideResults(); }
+    } else if (e.key === 'Escape') {
+        hideResults();
+    }
+});
+
+document.addEventListener('click', e => {
+    if (!e.target.closest('.quick-search-box')) hideResults();
+});
+
+// Horloge
+function updateClock() {
+    const now = new Date();
+    document.getElementById('horloge').textContent =
+        now.toLocaleString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// Greeting
+const greetings = ["Bonjour", "Hallo", "Hi", "прывітанне", "Ciao", "Hej", "Aloha"];
+const pick = greetings[Math.floor(Math.random() * greetings.length)];
+document.getElementById('himessage').textContent = `${pick}, Allan 👋`;
+</script>
 </body>
 </html>
