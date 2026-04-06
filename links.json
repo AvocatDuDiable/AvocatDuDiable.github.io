@@ -1,0 +1,104 @@
+[
+    {
+        "icon": "🏠",
+        "title": "Maison",
+        "links": [
+            { "label": "NAS",               "url": "http://nas:5000/",                                   "badge": "VPN" },
+            { "label": "RPI",               "url": "http://192.168.1.147:5000",                          "badge": "VPN" },
+            { "label": "PiHole",            "url": "http://192.168.1.147/admin",                         "badge": "VPN" },
+            { "label": "BBOX Admin",        "url": "https://mabbox.bytel.fr/login.html",                 "badge": "VPN" },
+            { "label": "Yunohost",          "url": "https://saika-alex-allan.xyz" },
+            { "label": "Immich (Photos)",   "url": "https://photos.saika-alex-allan.xyz" },
+            { "label": "Météo",             "url": "https://www.google.com/search?q=Meteo+Rhinau" }
+        ]
+    },
+    {
+        "icon": "💬",
+        "title": "Communication",
+        "links": [
+            { "label": "Messenger",  "url": "https://www.messenger.com/" },
+            { "label": "Outlook",    "url": "https://outlook.live.com/" },
+            { "label": "Proton",     "url": "https://mail.proton.me/" },
+            { "label": "Discord",    "url": "https://discord.com/app" },
+            { "label": "LinkedIn",   "url": "https://linkedin.com" },
+            { "label": "Facebook",   "url": "https://www.facebook.com/" }
+        ]
+    },
+    {
+        "icon": "🔗",
+        "title": "Liens",
+        "links": [
+            { "label": "Dealabs",    "url": "http://www.dealabs.com/" },
+            { "label": "MOKET",      "url": "https://jesuislibre.net/moket/" },
+            { "label": "SUTOM",      "url": "https://sutom.nocle.fr/#" },
+            { "label": "Claude (IA)","url": "https://claude.ai/new" },
+            { "label": "ICloud",     "url": "https://www.icloud.com/fr-fr" },
+            { "label": "🐔 Bicot",   "url": "https://docs.google.com/spreadsheets/d/1IEy_5tuqTkiP62Ny58VrAfi8hw7DUl3-4Se6N_MtGFU/edit?usp=drive_link" }
+        ]
+    },
+    {
+        "icon": "🎵",
+        "title": "Musique",
+        "links": [
+            { "label": "Spotify",         "url": "https://open.spotify.com/intl-fr" },
+            { "label": "Code Radio",      "url": "https://coderadio.freecodecamp.org/", "badge": "MP3" },
+            { "label": "Radios sans pub", "url": "https://www.allradio.net/category/1068" },
+            { "label": "Fun Radio",       "url": "https://www.funradio.fr/" }
+        ]
+    },
+    {
+        "icon": "🛠",
+        "title": "Outils",
+        "links": [
+            { "label": "FreshRSS",    "url": "https://rss.pcet.link/i/" },
+            { "label": "Photopea",    "url": "https://www.photopea.com/" },
+            { "label": "DeepL",       "url": "https://www.deepl.com/translator" },
+            { "label": "Private Bin", "url": "https://privatebin.at/" },
+            { "label": "LibreSpeed",  "url": "https://librespeed.org/" }
+        ]
+    },
+    {
+        "icon": "🔵",
+        "title": "Google",
+        "links": [
+            { "label": "YouTube", "url": "https://www.youtube.com/" },
+            { "label": "Agenda",  "url": "https://calendar.google.com/calendar/r" },
+            { "label": "Gmail",   "url": "https://mail.google.com/mail" },
+            { "label": "Drive",   "url": "https://drive.google.com/drive/u/0/my-drive" },
+            { "label": "Maps",    "url": "https://maps.google.com" }
+        ]
+    },
+    {
+        "icon": "💶",
+        "title": "Argent",
+        "links": [
+            { "label": "Cybermut",          "url": "https://www.creditmutuel.fr/cmo/fr/authentification.html" },
+            { "label": "Fortuneo",          "url": "https://mabanque.fortuneo.fr/fr/identification.jsp" },
+            { "label": "Fortuneo CB Virt.", "url": "https://mabanque.fortuneo.fr/carte-virtuelle/login" },
+            { "label": "N26",               "url": "https://app.n26.com/login" },
+            { "label": "PayPal",            "url": "https://www.paypal.com/signin" }
+        ]
+    },
+    {
+        "icon": "🎮",
+        "title": "Médias",
+        "links": [
+            { "label": "C411",                        "url": "https://c411.org/" },
+            { "label": "AllDebrid",                   "url": "https://alldebrid.fr/" },
+            { "label": "Logitech RS50 Games Settings","url": "https://support.logi.com/hc/en-gb/articles/34742210613655-Logitech-RS50-Racing-Wheel-Game-Compatibility-List-and-In-Game-Settings#h_01HBWQV43NBYPTYV8PTPVZ1CY1" },
+            { "label": "IRacing Week Planner",        "url": "https://iracing-week-planner.tmo.lol/" },
+            { "label": "Loaded",                      "url": "https://www.loaded.com/" }
+        ]
+    },
+    {
+        "icon": "💻",
+        "title": "Dev",
+        "links": [
+            { "label": "GitHub",        "url": "https://github.com/" },
+            { "label": "Outils de dev", "url": "https://www.freeformatter.com/" },
+            { "label": "Regex101",      "url": "https://regex101.com/" },
+            { "label": "FreeCodeCamp",  "url": "https://www.freecodecamp.org/" },
+            { "label": "Kilométrage",   "url": "./kilometrage.html" }
+        ]
+    }
+]

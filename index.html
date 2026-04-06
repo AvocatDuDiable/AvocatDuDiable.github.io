@@ -7,395 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --bg: #f5f5f7;
-            --surface: rgba(255, 255, 255, 0.72);
-            --surface-hover: rgba(255, 255, 255, 0.92);
-            --border: rgba(0, 0, 0, 0.08);
-            --text-primary: #1d1d1f;
-            --text-secondary: #6e6e73;
-            --text-tertiary: #aeaeb2;
-            --accent: #0071e3;
-            --accent-hover: #0077ed;
-            --shadow: 0 2px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
-            --radius: 16px;
-            --radius-sm: 10px;
-        }
-
-        [data-theme="dark"] {
-            --bg: #161617;
-            --surface: rgba(38, 38, 40, 0.80);
-            --surface-hover: rgba(50, 50, 52, 0.95);
-            --border: rgba(255, 255, 255, 0.08);
-            --text-primary: #f5f5f7;
-            --text-secondary: #a1a1a6;
-            --text-tertiary: #6e6e73;
-            --accent: #2997ff;
-            --accent-hover: #47a8ff;
-            --shadow: 0 2px 20px rgba(0, 0, 0, 0.30), 0 1px 4px rgba(0, 0, 0, 0.20);
-            --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.40), 0 2px 8px rgba(0, 0, 0, 0.25);
-        }
-
-        [data-theme="dark"] body::before {
-            background:
-                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(41, 151, 255, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(41, 151, 255, 0.04) 0%, transparent 60%);
-        }
-
-        body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding: 48px 24px 64px;
-            -webkit-font-smoothing: antialiased;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s, box-shadow 0.2s, transform 0.2s, border-color 0.3s;
-            font-size: 1rem;
-            line-height: 1;
-        }
-
-        .theme-toggle:hover {
-            box-shadow: var(--shadow-hover);
-            transform: scale(1.08);
-        }
-
-        .theme-toggle .icon-sun  { display: block; }
-        .theme-toggle .icon-moon { display: none;  }
-
-        [data-theme="dark"] .theme-toggle .icon-sun  { display: none;  }
-        [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
-
-        /* Subtle background texture */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: 
-                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0, 113, 227, 0.04) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0, 113, 227, 0.03) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeDown 0.6s ease both;
-        }
-
-        .greeting {
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-            line-height: 1.1;
-        }
-
-        .clock {
-            margin-top: 8px;
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-tertiary);
-            letter-spacing: 0.01em;
-        }
-
-        /* Search row */
-        .search-wrap {
-            margin-bottom: 40px;
-            animation: fadeDown 0.6s 0.1s ease both;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            position: relative;
-            z-index: 500;
-        }
-
-        .search-box {
-            flex: 1;
-            position: relative;
-        }
-
-        .search-form {
-            display: flex;
-            align-items: center;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            padding: 0 20px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow);
-            transition: box-shadow 0.2s, border-color 0.2s, background 0.3s;
-        }
-
-        .search-form:focus-within {
-            box-shadow: var(--shadow-hover), 0 0 0 3px rgba(0, 113, 227, 0.15);
-            border-color: rgba(0, 113, 227, 0.3);
-        }
-
-        .search-icon {
-            color: var(--text-tertiary);
-            margin-right: 10px;
-            flex-shrink: 0;
-        }
-
-        .search-input {
-            width: 100%;
-            border: none;
-            background: transparent;
-            padding: 14px 0;
-            font-family: inherit;
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            outline: none;
-        }
-
-        .search-input::placeholder {
-            color: var(--text-tertiary);
-        }
-
-        /* Quick search dropdown */
-        .quick-search-box {
-            flex: 1;
-            position: relative;
-        }
-
-        .quick-search-form {
-            display: flex;
-            align-items: center;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            padding: 0 20px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow);
-            transition: box-shadow 0.2s, border-color 0.2s, background 0.3s;
-        }
-
-        .quick-search-form:focus-within {
-            box-shadow: var(--shadow-hover), 0 0 0 3px rgba(0, 113, 227, 0.15);
-            border-color: rgba(0, 113, 227, 0.3);
-        }
-
-        .quick-search-input {
-            width: 100%;
-            border: none;
-            background: transparent;
-            padding: 14px 0;
-            font-family: inherit;
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            outline: none;
-        }
-
-        .quick-search-input::placeholder {
-            color: var(--text-tertiary);
-        }
-
-        .quick-results {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 0;
-            right: 0;
-            background: var(--surface-hover);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: var(--shadow-hover);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            overflow: hidden;
-            z-index: 1000;
-            display: none;
-        }
-
-        .quick-results.visible {
-            display: block;
-        }
-
-        .quick-result-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            cursor: pointer;
-            transition: background 0.12s;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-size: 0.93rem;
-        }
-
-        .quick-result-item:hover,
-        .quick-result-item.active {
-            background: rgba(0, 113, 227, 0.08);
-            color: var(--accent);
-        }
-
-        .quick-result-item .result-icon {
-            font-size: 1rem;
-            width: 20px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .quick-result-item .result-category {
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-            margin-left: auto;
-            flex-shrink: 0;
-        }
-
-        .quick-no-result {
-            padding: 12px 16px;
-            color: var(--text-tertiary);
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        @media (max-width: 600px) {
-            .search-wrap { flex-direction: column; }
-        }
-
-        /* Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Card */
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow);
-            transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.3s ease, border-color 0.3s ease;
-            animation: fadeUp 0.5s ease both;
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-            background: var(--surface-hover);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .card-icon {
-            font-size: 1.1rem;
-            line-height: 1;
-        }
-
-        .card-title {
-            font-size: 0.78rem;
-            font-weight: 500;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--text-tertiary);
-        }
-
-        /* Link list */
-        .link-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .link-list li a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 8px;
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 0.93rem;
-            font-weight: 400;
-            transition: background 0.15s, color 0.15s;
-        }
-
-        .link-list li a:hover {
-            background: rgba(0, 113, 227, 0.07);
-            color: var(--accent);
-        }
-
-        .link-list li a .badge {
-            font-size: 0.65rem;
-            font-weight: 500;
-            padding: 2px 6px;
-            border-radius: 4px;
-            background: rgba(0, 113, 227, 0.1);
-            color: var(--accent);
-            letter-spacing: 0.04em;
-        }
-
-        /* Animations */
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            body { padding: 32px 16px 48px; }
-            .grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 <button class="theme-toggle" id="themeToggle" title="Changer de thème">
@@ -438,131 +50,9 @@
 
 <script>
 // ============================================================
-//  ✏️  CONFIGURATION — Modifiez cette section pour ajouter,
+//  ✏️  CONFIGURATION — Modifiez links.json pour ajouter,
 //  supprimer ou réorganiser des liens.
-//
-//  Structure d'une catégorie :
-//  {
-//    icon: "emoji",
-//    title: "Nom de la section",
-//    links: [
-//      { label: "Nom affiché", url: "https://..." },
-//      { label: "Nom", url: "https://...", badge: "TEXTE" }, // badge optionnel
-//    ]
-//  }
 // ============================================================
-
-const CATEGORIES = [
-    {
-        icon: "💬",
-        title: "Communication",
-        links: [
-            { label: "Messenger",  url: "https://www.messenger.com/" },
-            { label: "Outlook",    url: "https://outlook.live.com/" },
-            { label: "Proton",     url: "https://mail.proton.me/" },
-            { label: "Discord",    url: "https://discord.com/app" },
-            { label: "LinkedIn",   url: "https://linkedin.com" },
-            { label: "Facebook",   url: "https://www.facebook.com/" },
-        ]
-    },
-    {
-        icon: "🔗",
-        title: "Liens",
-        links: [
-            { label: "Dealabs",    url: "http://www.dealabs.com/" },
-            { label: "MOKET",      url: "https://jesuislibre.net/moket/" },
-            { label: "SUTOM",      url: "https://sutom.nocle.fr/#" },
-            { label: "Claude (IA)",url: "https://claude.ai/new" },
-            { label: "ICloud",     url: "https://www.icloud.com/fr-fr" },
-            { label: "🐔 Bicot",     url: "https://docs.google.com/spreadsheets/d/1IEy_5tuqTkiP62Ny58VrAfi8hw7DUl3-4Se6N_MtGFU/edit?usp=drive_link" },            
-        ]
-    },
-    {
-        icon: "🎵",
-        title: "Musique",
-        links: [
-            { label: "Spotify",          url: "https://open.spotify.com/intl-fr" },
-            { label: "Code Radio",       url: "https://coderadio.freecodecamp.org/", badge: "MP3" },
-            { label: "Radios sans pub",  url: "https://www.allradio.net/category/1068" },
-            { label: "Fun Radio",        url: "https://www.funradio.fr/" },
-        ]
-    },
-    {
-        icon: "🛠",
-        title: "Outils",
-        links: [
-            { label: "FreshRSS",     url: "https://rss.pcet.link/i/" },
-            { label: "Photopea",     url: "https://www.photopea.com/" },
-            { label: "DeepL",        url: "https://www.deepl.com/translator" },
-            { label: "Private Bin",  url: "https://privatebin.at/" },
-            { label: "LibreSpeed",   url: "https://librespeed.org/" },
-        ]
-    },
-    {
-        icon: "🔵",
-        title: "Google",
-        links: [
-            { label: "YouTube",  url: "https://www.youtube.com/" },
-            { label: "Agenda",   url: "https://calendar.google.com/calendar/r" },
-            { label: "Gmail",    url: "https://mail.google.com/mail" },
-            { label: "Drive",    url: "https://drive.google.com/drive/u/0/my-drive" },
-            { label: "Maps",     url: "https://maps.google.com" },
-        ]
-    },
-    {
-        icon: "💶",
-        title: "Argent",
-        links: [
-            { label: "Cybermut",          url: "https://www.creditmutuel.fr/cmo/fr/authentification.html" },
-            { label: "Fortuneo",          url: "https://mabanque.fortuneo.fr/fr/identification.jsp" },
-            { label: "Fortuneo CB Virt.", url: "https://mabanque.fortuneo.fr/carte-virtuelle/login" },
-            { label: "N26",               url: "https://app.n26.com/login" },
-            { label: "PayPal",            url: "https://www.paypal.com/signin" },
-        ]
-    },
-    {
-        icon: "🏠",
-        title: "Maison",
-        links: [           
-            { label: "NAS",       url: "http://nas:5000/", badge: "VPN"  },
-            { label: "RPI",       url: "http://192.168.1.147:5000", badge: "VPN"  },            
-            { label: "PiHole",       url: "http://192.168.1.147/admin", badge: "VPN"  },            
-            { label: "BBOX Admin",   url: "https://mabbox.bytel.fr/login.html", badge: "VPN"  },
-            { label: "Yunohost",       url: "https://saika-alex-allan.xyz" },
-            { label: "Immich (Photos)",       url: "https://photos.saika-alex-allan.xyz" },
-            { label: "Météo",     url: "https://www.google.com/search?q=Meteo+Rhinau" },
-        ]
-    },
-     {
-        icon: "🎮",
-        title: "Médias",
-        links: [
-            { label: "C411",       url: "https://c411.org/" },
-            { label: "AllDebrid", url: "https://alldebrid.fr/" },
-            { label: "Logitech RS50 Games Settings",   url: "https://support.logi.com/hc/en-gb/articles/34742210613655-Logitech-RS50-Racing-Wheel-Game-Compatibility-List-and-In-Game-Settings#h_01HBWQV43NBYPTYV8PTPVZ1CY1" },
-            { label: "IRacing Week Planner",   url: "https://iracing-week-planner.tmo.lol/" },
-            { label: "Loaded",   url: "https://www.loaded.com/" },
-        ]
-    },
-    {
-        icon: "💻",
-        title: "Dev",
-        links: [
-            { label: "GitHub",        url: "https://github.com/" },
-            { label: "Outils de dev", url: "https://www.freeformatter.com/" },
-            { label: "Regex101",      url: "https://regex101.com/" },
-            { label: "FreeCodeCamp",  url: "https://www.freecodecamp.org/" },
-            { label: "Kilométrage",   url: "./kilometrage.html" },
-        ]
-    },
-    {
-        icon: "🏢",
-        title: "Travail",
-        links: [
-            { label: "Office 365", url: "https://www.office.com/login?es=Click&ru=%2F&msafed=0" },
-        ]
-    },
-];
 
 // ============================================================
 //  Thème clair / sombre — mémorisé dans localStorage
@@ -590,43 +80,41 @@ toggleBtn.addEventListener('click', () => {
 
 
 // ============================================================
-//  Rendu — Ne pas modifier en dessous sauf si vous savez 
+//  Rendu — Ne pas modifier en dessous sauf si vous savez
 //  ce que vous faites 🙂
 // ============================================================
 
 const grid = document.getElementById('grid');
+const quickInput   = document.getElementById('quickInput');
+const quickResults = document.getElementById('quickResults');
+let activeIndex = -1;
+let ALL_LINKS = [];
 
-CATEGORIES.forEach((cat, i) => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.style.animationDelay = `${i * 0.05}s`;
+function renderGrid(categories) {
+    categories.forEach((cat, i) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.animationDelay = `${i * 0.05}s`;
 
-    const links = cat.links.map(l => {
-        const badge = l.badge ? `<span class="badge">${l.badge}</span>` : '';
-        return `<li><a href="${l.url}" target="_blank">${l.label}${badge}</a></li>`;
-    }).join('');
+        const links = cat.links.map(l => {
+            const badge = l.badge ? `<span class="badge">${l.badge}</span>` : '';
+            return `<li><a href="${l.url}" target="_blank">${l.label}${badge}</a></li>`;
+        }).join('');
 
-    card.innerHTML = `
-        <div class="card-header">
-            <span class="card-icon">${cat.icon}</span>
-            <span class="card-title">${cat.title}</span>
-        </div>
-        <ul class="link-list">${links}</ul>
-    `;
-    grid.appendChild(card);
-});
+        card.innerHTML = `
+            <div class="card-header">
+                <span class="card-icon">${cat.icon}</span>
+                <span class="card-title">${cat.title}</span>
+            </div>
+            <ul class="link-list">${links}</ul>
+        `;
+        grid.appendChild(card);
+    });
+}
 
 // ============================================================
 //  Accès rapide — recherche parmi tous les liens
 // ============================================================
-
-const ALL_LINKS = CATEGORIES.flatMap(cat =>
-    cat.links.map(l => ({ label: l.label, url: l.url, icon: cat.icon, category: cat.title }))
-);
-
-const quickInput   = document.getElementById('quickInput');
-const quickResults = document.getElementById('quickResults');
-let activeIndex = -1;
 
 function getMatches(query) {
     if (!query.trim()) return [];
@@ -682,6 +170,15 @@ quickInput.addEventListener('keydown', e => {
 document.addEventListener('click', e => {
     if (!e.target.closest('.quick-search-box')) hideResults();
 });
+
+fetch('links.json')
+    .then(r => r.json())
+    .then(categories => {
+        ALL_LINKS = categories.flatMap(cat =>
+            cat.links.map(l => ({ label: l.label, url: l.url, icon: cat.icon, category: cat.title }))
+        );
+        renderGrid(categories);
+    });
 
 // Horloge
 function updateClock() {
