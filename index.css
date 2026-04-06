@@ -105,25 +105,61 @@ body::before {
 
 /* Header */
 .header {
-    text-align: center;
     margin-bottom: 40px;
     animation: fadeDown 0.6s ease both;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
-.greeting {
-    font-size: clamp(2rem, 5vw, 2.8rem);
+.header-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.header-title {
+    font-size: clamp(1.4rem, 4vw, 2rem);
     font-weight: 300;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text-primary);
-    line-height: 1.1;
 }
 
-.clock {
-    margin-top: 8px;
-    font-size: 1rem;
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+}
+
+/* Quote */
+.quote-wrap {
+    text-align: center;
+    margin-bottom: 32px;
+    margin-top: -24px;
+    animation: fadeDown 0.6s 0.05s ease both;
+    padding: 0 16px;
+}
+
+.quote-text {
+    font-size: 0.95rem;
     font-weight: 400;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 6px;
+}
+
+.quote-author {
+    font-size: 0.78rem;
+    font-style: normal;
     color: var(--text-tertiary);
-    letter-spacing: 0.01em;
+    letter-spacing: 0.04em;
 }
 
 /* Search row */

@@ -17,9 +17,11 @@
 <div class="container">
 
     <header class="header">
-        <div class="greeting" id="himessage"></div>
-        <div class="clock" id="horloge"></div>
+        <img src="AvocatDuDiable.png" alt="Logo AvocatDuDiable" class="header-logo">
+        <div class="header-title">L'AVOCAT DU DIABLE</div>
     </header>
+
+    <div class="quote-wrap" id="quoteWrap"></div>
 
     <div class="search-wrap">
         <!-- Recherche rapide parmi les liens -->
@@ -171,6 +173,15 @@ document.addEventListener('click', e => {
     if (!e.target.closest('.quick-search-box')) hideResults();
 });
 
+fetch('quotes.json')
+    .then(r => r.json())
+    .then(quotes => {
+        const q = quotes[Math.floor(Math.random() * quotes.length)];
+        document.getElementById('quoteWrap').innerHTML =
+            `<blockquote class="quote-text">"${q.text}"</blockquote>
+             <cite class="quote-author">— ${q.author}</cite>`;
+    });
+
 fetch('links.json')
     .then(r => r.json())
     .then(categories => {
@@ -180,19 +191,6 @@ fetch('links.json')
         renderGrid(categories);
     });
 
-// Horloge
-function updateClock() {
-    const now = new Date();
-    document.getElementById('horloge').textContent =
-        now.toLocaleString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-}
-updateClock();
-setInterval(updateClock, 1000);
-
-// Greeting
-const greetings = ["Bonjour", "Hallo", "Hi", "прывітанне", "Ciao", "Hej", "Aloha"];
-const pick = greetings[Math.floor(Math.random() * greetings.length)];
-document.getElementById('himessage').textContent = `${pick}, Allan 👋`;
 </script>
 </body>
 </html>
