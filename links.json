@@ -9,7 +9,7 @@
             { "label": "BBOX Admin",        "url": "https://mabbox.bytel.fr/login.html",                 "badge": "VPN" },
             { "label": "Yunohost",          "url": "https://saika-alex-allan.xyz" },
             { "label": "Immich (Photos)",   "url": "https://photos.saika-alex-allan.xyz" },
-            { "label": "Météo",             "url": "https://www.google.com/search?q=Meteo+Rhinau" }
+            { "label": "Jellyfin",             "url": "https://streaming.saika-alex-allan.xyz" }
         ]
     },
     {
@@ -33,7 +33,8 @@
             { "label": "SUTOM",      "url": "https://sutom.nocle.fr/#" },
             { "label": "Claude (IA)","url": "https://claude.ai/new" },
             { "label": "ICloud",     "url": "https://www.icloud.com/fr-fr" },
-            { "label": "🐔 Bicot",   "url": "https://docs.google.com/spreadsheets/d/1IEy_5tuqTkiP62Ny58VrAfi8hw7DUl3-4Se6N_MtGFU/edit?usp=drive_link" }
+            { "label": "🐔 Bicot",   "url": "https://docs.google.com/spreadsheets/d/1IEy_5tuqTkiP62Ny58VrAfi8hw7DUl3-4Se6N_MtGFU/edit?usp=drive_link" },
+            { "label": "Météo",             "url": "https://www.google.com/search?q=Meteo+Rhinau" }
         ]
     },
     {
