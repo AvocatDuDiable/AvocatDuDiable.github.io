@@ -9,7 +9,8 @@
             { "label": "BBOX Admin",        "url": "https://mabbox.bytel.fr/login.html",                 "badge": "VPN" },
             { "label": "Yunohost",          "url": "https://saika-alex-allan.xyz" },
             { "label": "Immich (Photos)",   "url": "https://photos.saika-alex-allan.xyz" },
-            { "label": "Jellyfin",             "url": "https://streaming.saika-alex-allan.xyz" }
+            { "label": "Jellyfin",             "url": "https://streaming.saika-alex-allan.xyz" },
+            { "label": "Drip",             "url": "https://drip.saika-alex-allan.xyz" }
         ]
     },
     {
