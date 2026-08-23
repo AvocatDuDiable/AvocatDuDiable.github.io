@@ -33,7 +33,14 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+html{
+  -webkit-text-size-adjust:100%;
+  touch-action:manipulation;              /* supprime le zoom au double-tap, garde le pincement */
+  -webkit-tap-highlight-color:transparent; /* supprime le flash gris iOS/Android */
+}
+button,.vignette,.moyen>summary,.faq summary,.onglets button,.pad button{
+  -webkit-user-select:none;user-select:none;
+}
 body{
   background:var(--lin);
   color:var(--encre);
