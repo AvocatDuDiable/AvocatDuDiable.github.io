@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4EDE3">
+<title>Alexandra &amp; Allan — 11.09.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   JETONS DE DESIGN — "Chic champêtre"
+   lin / craie / rose poudré / rose fané / eucalyptus / encre
+   ============================================================ */
+:root{
+  --lin:#F4EDE3;
+  --craie:#FBF7F1;
+  --rose-poudre:#E7C3BD;
+  --rose-fane:#B0736B;
+  --eucalyptus:#8C9A82;
+  --encre:#3B342C;
+  --encre-clair:#7C7264;
+  --sable:#DCCFBC;
+
+  --r-s:8px; --r-m:14px; --r-l:22px;
+  --ombre:0 1px 2px rgba(59,52,44,.04), 0 12px 32px -18px rgba(59,52,44,.28);
+  --ease:cubic-bezier(.22,.61,.36,1);
+
+  --pad:20px;
+  --safe-b:env(safe-area-inset-bottom, 0px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--lin);
+  color:var(--encre);
+  font-family:"Jost",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:300;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior-y:none;
+}
+/* grain papier très léger */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+}
+h1,h2,h3,.serif{font-family:"Marcellus",Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:.01em}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--rose-fane);outline-offset:3px;border-radius:4px}
+img{max-width:100%;display:block}
+
+.eyebrow{
+  font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--encre-clair);font-weight:400;
+}
+
+/* ============================================================
+   COQUE APPLICATION (mobile first, centrée sur desktop)
+   ============================================================ */
+.app-shell{
+  position:relative;z-index:1;
+  max-width:480px;margin:0 auto;min-height:100dvh;
+  background:var(--craie);
+  box-shadow:0 0 60px -20px rgba(59,52,44,.25);
+}
+@media(min-width:520px){
+  .app-shell{min-height:100dvh;border-left:1px solid var(--sable);border-right:1px solid var(--sable)}
+}
+
+/* ============================================================
+   ÉCRAN 1 — LE FAIRE-PART / CODE PIN
+   ============================================================ */
+.gate{
+  position:fixed;inset:0;z-index:60;background:var(--lin);
+  display:flex;align-items:center;justify-content:center;padding:24px 20px;
+  transition:opacity .6s var(--ease), visibility .6s;
+}
+.gate.is-open{opacity:0;visibility:hidden;pointer-events:none}
+.card-invit{
+  width:100%;max-width:360px;background:var(--craie);
+  border:1px solid var(--sable);border-radius:2px;
+  padding:34px 26px 28px;text-align:center;box-shadow:var(--ombre);
+  position:relative;
+}
+.card-invit::after{
+  content:"";position:absolute;inset:7px;border:1px solid rgba(176,115,107,.22);pointer-events:none;
+}
+.monogram{
+  font-family:"Marcellus",serif;font-size:30px;letter-spacing:.12em;
+  color:var(--rose-fane);
+}
+.gate .sprig{margin:12px auto 16px}
+.card-invit h1{font-size:15px;letter-spacing:.3em;text-transform:uppercase;margin:0 0 6px;font-weight:400}
+.card-invit .date{font-family:"Marcellus",serif;font-size:26px;margin:0 0 4px}
+.card-invit .lieu{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--encre-clair);margin:0}
+.gate-consigne{font-size:13.5px;color:var(--encre-clair);margin:22px 0 14px;line-height:1.5}
+
+.dots{display:flex;gap:14px;justify-content:center;margin-bottom:6px}
+.dot{width:11px;height:11px;border-radius:50%;border:1px solid var(--rose-fane);transition:all .25s var(--ease)}
+.dot.on{background:var(--rose-fane);transform:scale(1.15)}
+.gate-erreur{height:18px;font-size:12.5px;color:var(--rose-fane);letter-spacing:.04em;margin:6px 0 2px}
+.is-shake{animation:shake .4s var(--ease)}
+@keyframes shake{
+  10%,90%{transform:translateX(-3px)} 30%,70%{transform:translateX(5px)} 50%{transform:translateX(-5px)}
+}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.pad button{
+  height:56px;border-radius:50px;background:var(--lin);
+  font-family:"Marcellus",serif;font-size:21px;color:var(--encre);
+  border:1px solid transparent;transition:.18s var(--ease);
+}
+.pad button:active{background:var(--rose-poudre);transform:scale(.96)}
+.pad .util{font-family:"Jost",sans-serif;font-size:13px;letter-spacing:.1em;color:var(--encre-clair);background:transparent}
+
+/* ============================================================
+   EN-TÊTE
+   ============================================================ */
+.entete{
+  padding:calc(env(safe-area-inset-top,0px) + 22px) var(--pad) 16px;
+  text-align:center;border-bottom:1px solid var(--sable);
+  background:var(--craie);position:sticky;top:0;z-index:20;
+}
+.entete .noms{font-family:"Marcellus",serif;font-size:19px;letter-spacing:.16em;margin:0}
+.entete .sep{color:var(--rose-fane)}
+.entete .jour{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--encre-clair);margin:4px 0 0}
+
+/* ============================================================
+   VUES
+   ============================================================ */
+main{padding:0 var(--pad) 108px}
+.view{display:none;animation:apparait .45s var(--ease) both}
+.view.is-active{display:block}
+@keyframes apparait{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.titre-vue{text-align:center;padding:30px 0 10px}
+.titre-vue h2{font-size:29px;margin:6px 0 8px;line-height:1.2}
+.titre-vue p{font-size:14.5px;color:var(--encre-clair);margin:0 auto;max-width:31ch;line-height:1.65}
+
+.sprig{display:block;color:var(--eucalyptus)}
+.sprig path,.sprig line{stroke:currentColor;fill:none;stroke-width:1;stroke-linecap:round}
+.sep-sprig{display:flex;align-items:center;gap:14px;margin:26px 0}
+.sep-sprig::before,.sep-sprig::after{content:"";flex:1;height:1px;background:var(--sable)}
+
+/* Cartes génériques */
+.carte{
+  background:var(--craie);border:1px solid var(--sable);border-radius:var(--r-m);
+  padding:18px;margin-bottom:14px;
+}
+.carte.creme{background:var(--lin)}
+
+/* Formulaires */
+label.champ{display:block;margin-bottom:14px}
+label.champ > span{
+  display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--encre-clair);margin-bottom:7px;
+}
+input[type=text],textarea{
+  width:100%;background:var(--craie);border:1px solid var(--sable);
+  border-radius:var(--r-s);padding:13px 14px;font-size:16px;font-weight:300;
+  transition:border-color .2s,box-shadow .2s;
+}
+input[type=text]:focus,textarea:focus{
+  outline:none;border-color:var(--rose-fane);box-shadow:0 0 0 3px rgba(176,115,107,.12);
+}
+textarea{resize:vertical;min-height:118px;line-height:1.6}
+.compteur{text-align:right;font-size:11.5px;color:var(--encre-clair);margin-top:5px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;min-height:52px;padding:0 20px;border-radius:50px;
+  background:var(--rose-fane);color:#FDFAF6;
+  font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;
+  transition:.2s var(--ease);text-decoration:none;
+}
+.btn:active{transform:scale(.985);background:#9c635c}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.btn.creux{background:transparent;color:var(--rose-fane);border:1px solid var(--rose-fane)}
+.btn.discret{background:var(--lin);color:var(--encre);border:1px solid var(--sable);min-height:44px}
+
+/* ============================================================
+   LIVRE D'OR
+   ============================================================ */
+.mot{
+  background:var(--craie);border:1px solid var(--sable);border-radius:var(--r-m);
+  padding:18px 18px 16px;margin-bottom:12px;position:relative;
+  animation:apparait .4s var(--ease) both;
+}
+.mot-tete{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+.pastille{
+  width:38px;height:38px;border-radius:50%;flex:none;
+  background:var(--rose-poudre);color:#6d4a45;
+  display:grid;place-items:center;font-family:"Marcellus",serif;font-size:14px;letter-spacing:.04em;
+}
+.mot-tete .qui{font-family:"Marcellus",serif;font-size:16.5px;line-height:1.2}
+.mot-tete .quand{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--encre-clair)}
+.mot p{margin:0;font-size:15px;line-height:1.7;color:#4a4239;white-space:pre-wrap}
+.compte-mots{text-align:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--encre-clair);margin:0 0 16px}
+
+.vide{
+  text-align:center;padding:38px 22px;border:1px dashed var(--sable);border-radius:var(--r-m);
+  color:var(--encre-clair);font-size:14.5px;line-height:1.6;
+}
+.vide .serif{display:block;font-size:19px;color:var(--encre);margin-bottom:6px}
+
+/* ============================================================
+   CAGNOTTE
+   ============================================================ */
+.moyen{border:1px solid var(--sable);border-radius:var(--r-m);margin-bottom:12px;overflow:hidden;background:var(--craie)}
+.moyen > summary{
+  list-style:none;display:flex;align-items:center;gap:14px;padding:17px 18px;cursor:pointer;
+}
+.moyen > summary::-webkit-details-marker{display:none}
+.moyen .ico{
+  width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:var(--lin);border:1px solid var(--sable);
+  font-family:"Marcellus",serif;font-size:15px;color:var(--rose-fane);
+}
+.moyen .lib{flex:1;min-width:0}
+.moyen .lib strong{display:block;font-family:"Marcellus",serif;font-weight:400;font-size:17px;line-height:1.25}
+.moyen .lib span{font-size:12.5px;color:var(--encre-clair)}
+.chevron{transition:transform .25s var(--ease);color:var(--encre-clair);flex:none}
+.moyen[open] .chevron{transform:rotate(180deg)}
+.moyen-corps{padding:0 18px 18px;border-top:1px solid var(--sable);margin-top:-1px;padding-top:16px}
+.moyen[open] .moyen-corps{animation:apparait .3s var(--ease) both}
+
+.ligne-copie{
+  display:flex;align-items:center;gap:10px;justify-content:space-between;
+  background:var(--lin);border:1px solid var(--sable);border-radius:var(--r-s);
+  padding:11px 12px;margin-bottom:9px;
+}
+.ligne-copie .cle{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--encre-clair);margin-bottom:2px}
+.ligne-copie .val{font-size:14.5px;letter-spacing:.03em;word-break:break-all;line-height:1.35}
+.copier{
+  flex:none;border:1px solid var(--sable);background:var(--craie);border-radius:50px;
+  padding:7px 13px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-fane);
+}
+.copier:active{background:var(--rose-poudre)}
+.note{font-size:13.5px;color:var(--encre-clair);line-height:1.65;margin:0 0 14px}
+
+/* ============================================================
+   ALBUM
+   ============================================================ */
+.depot{
+  border:1px dashed var(--rose-poudre);border-radius:var(--r-m);background:var(--lin);
+  padding:26px 18px;text-align:center;
+}
+.depot .serif{font-size:19px;display:block;margin:10px 0 4px}
+.depot p{font-size:13px;color:var(--encre-clair);margin:0 0 16px}
+.apercus{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:16px 0}
+.apercu{position:relative;aspect-ratio:1;border-radius:var(--r-s);overflow:hidden;border:1px solid var(--sable);animation:apparait .3s var(--ease) both}
+.apercu img{width:100%;height:100%;object-fit:cover}
+.apercu button{
+  position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;
+  background:rgba(59,52,44,.72);color:#fff;font-size:12px;line-height:1;display:grid;place-items:center;
+}
+.grille{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.vignette{
+  position:relative;aspect-ratio:1;border-radius:var(--r-s);overflow:hidden;
+  border:1px solid var(--sable);padding:0;animation:apparait .4s var(--ease) both;
+}
+.vignette img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.vignette:active img{transform:scale(1.04)}
+.vignette figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:16px 9px 7px;text-align:left;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  background:linear-gradient(to top,rgba(59,52,44,.62),transparent);
+}
+.barre{height:3px;background:var(--sable);border-radius:3px;overflow:hidden;margin-top:14px}
+.barre i{display:block;height:100%;width:0;background:var(--rose-fane);transition:width .25s linear}
+
+.lightbox{
+  position:fixed;inset:0;z-index:70;background:rgba(46,40,33,.94);
+  display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;
+}
+.lightbox.is-open{display:flex;animation:apparait .25s var(--ease) both}
+.lightbox img{max-width:100%;max-height:76dvh;border-radius:var(--r-s);object-fit:contain}
+.lightbox .legende{color:#E8DFD2;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-top:16px}
+.lb-nav{position:absolute;inset:auto 0 0;display:flex;justify-content:space-between;padding:0 14px 26px;pointer-events:none}
+.lb-nav button{pointer-events:auto;color:#F4EDE3;font-size:26px;padding:14px 18px;font-family:"Marcellus",serif}
+.lb-fermer{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;color:#F4EDE3;font-size:24px;padding:10px 14px}
+
+/* ============================================================
+   INFOS PRATIQUES
+   ============================================================ */
+.chrono{list-style:none;margin:0;padding:0 0 0 4px}
+.chrono li{display:grid;grid-template-columns:58px 1fr;gap:16px;position:relative;padding-bottom:24px}
+.chrono li::before{
+  content:"";position:absolute;left:66px;top:9px;bottom:-1px;width:1px;background:var(--sable);
+}
+.chrono li:last-child{padding-bottom:0}
+.chrono li:last-child::before{display:none}
+.chrono .h{font-family:"Marcellus",serif;font-size:16px;color:var(--rose-fane);text-align:right;padding-top:1px}
+.chrono .quoi{position:relative;padding-left:20px}
+.chrono .quoi::before{
+  content:"";position:absolute;left:-4px;top:8px;width:7px;height:7px;border-radius:50%;
+  background:var(--craie);border:1px solid var(--rose-fane);
+}
+.chrono .quoi strong{display:block;font-family:"Marcellus",serif;font-weight:400;font-size:16.5px;line-height:1.3}
+.chrono .quoi span{font-size:13.5px;color:var(--encre-clair);line-height:1.55}
+
+.bloc-titre{
+  display:flex;align-items:baseline;gap:12px;margin:0 0 14px;
+}
+.bloc-titre h3{font-size:21px;margin:0}
+.bloc-titre::after{content:"";flex:1;height:1px;background:var(--sable)}
+
+.lieu-carte h4{font-family:"Marcellus",serif;font-weight:400;font-size:17.5px;margin:0 0 3px}
+.lieu-carte address{font-style:normal;font-size:14px;color:var(--encre-clair);line-height:1.55;margin-bottom:14px}
+
+.faq{border-bottom:1px solid var(--sable)}
+.faq summary{list-style:none;padding:15px 0;display:flex;gap:12px;align-items:center;cursor:pointer;font-size:15.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .q{flex:1}
+.faq p{margin:0 0 16px;font-size:14px;color:var(--encre-clair);line-height:1.7}
+.faq[open] summary .chevron{transform:rotate(180deg)}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.raccourcis{text-align:center;margin-top:4px}
+.raccourcis .btn{font-size:11px;letter-spacing:.1em;padding:0 8px}
+.contact{text-align:center;padding:16px 10px}
+.contact .role{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--encre-clair)}
+.contact .nom{font-family:"Marcellus",serif;font-size:16.5px;margin:4px 0 8px}
+.contact a{color:var(--rose-fane);text-decoration:none;font-size:14px;letter-spacing:.04em}
+
+.pied{text-align:center;padding:34px 0 10px;color:var(--encre-clair);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+
+/* ============================================================
+   BARRE D'ONGLETS
+   ============================================================ */
+.onglets{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  max-width:480px;margin:0 auto;
+  background:rgba(251,247,241,.94);backdrop-filter:blur(12px);
+  border-top:1px solid var(--sable);
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding:8px 4px calc(8px + var(--safe-b));
+}
+.onglets button{
+  display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 2px 4px;
+  color:var(--encre-clair);transition:color .2s;position:relative;
+}
+.onglets button .lb{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+.onglets button.actif{color:var(--rose-fane)}
+.onglets button.actif::after{
+  content:"";position:absolute;top:-9px;width:20px;height:1px;background:var(--rose-fane);
+}
+.onglets svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Toast */
+.toast{
+  position:fixed;left:50%;bottom:calc(84px + var(--safe-b));transform:translate(-50%,14px);
+  z-index:80;background:var(--encre);color:var(--lin);
+  padding:12px 20px;border-radius:50px;font-size:13px;letter-spacing:.04em;
+  opacity:0;pointer-events:none;transition:.3s var(--ease);white-space:nowrap;max-width:90vw;
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ========================= PORTE / CODE PIN ========================= -->
+<div class="gate" id="gate">
+  <div class="card-invit" id="carteInvit">
+    <div class="monogram">A <span style="color:var(--eucalyptus)">&amp;</span> A</div>
+    <svg class="sprig" width="72" height="14" viewBox="0 0 72 14" aria-hidden="true">
+      <path d="M6 7h60"/>
+      <path d="M28 7c2-3 5-4 8-4-1 3-4 4-8 4Z"/>
+      <path d="M44 7c-2 3-5 4-8 4 1-3 4-4 8-4Z"/>
+      <path d="M36 7c0-2 1-4 3-5M36 7c0 2-1 4-3 5"/>
+    </svg>
+    <h1>Nous nous marions</h1>
+    <p class="date" id="gateDate">11 septembre 2026</p>
+    <p class="lieu" id="gateLieu">Domaine Imodis · Saessolsheim</p>
+
+    <p class="gate-consigne">Entrez le code à 4 chiffres<br>indiqué sous le QR code</p>
+
+    <div class="dots" id="dots">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <p class="gate-erreur" id="gateErreur"></p>
+
+    <div class="pad" id="pad">
+      <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+      <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+      <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+      <button class="util" data-k="clear">Effacer</button>
+      <button data-k="0">0</button>
+      <button class="util" data-k="del">⌫</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================= APPLICATION ========================= -->
+<div class="app-shell" id="app" hidden>
+
+  <header class="entete">
+    <p class="noms">ALEXANDRA <span class="sep">&amp;</span> ALLAN</p>
+    <p class="jour" id="enteteJour">11 · 09 · 2026</p>
+  </header>
+
+  <main>
+
+    <!-- ---------- INFOS PRATIQUES ---------- -->
+    <section class="view is-active" id="v-infos">
+      <div class="titre-vue">
+        <p class="eyebrow">Le jour J</p>
+        <h2>Informations pratiques</h2>
+        <p>Tout se passe au Domaine Imodis, de l'accueil à la dernière danse.</p>
+      </div>
+
+      <div class="carte creme raccourcis">
+        <p class="eyebrow">Vous êtes déjà sur place ?</p>
+        <div class="duo" style="margin-top:12px">
+          <button class="btn discret" data-aller="v-album">Déposer une photo</button>
+          <button class="btn discret" data-aller="v-livre">Écrire un mot</button>
+        </div>
+      </div>
+
+      <div class="sep-sprig">
+        <svg class="sprig" width="40" height="12" viewBox="0 0 40 12" aria-hidden="true">
+          <path d="M20 1c0 4-3 8-8 10 0-4 3-8 8-10Z"/><path d="M20 1c0 4 3 8 8 10 0-4-3-8-8-10Z"/>
+        </svg>
+      </div>
+
+      <ul class="chrono" id="chrono"></ul>
+
+      <div class="sep-sprig">
+        <svg class="sprig" width="40" height="12" viewBox="0 0 40 12" aria-hidden="true">
+          <path d="M20 1c0 4-3 8-8 10 0-4 3-8 8-10Z"/><path d="M20 1c0 4 3 8 8 10 0-4-3-8-8-10Z"/>
+        </svg>
+      </div>
+
+      <div class="bloc-titre"><h3>Les lieux</h3></div>
+      <div id="lieux"></div>
+
+      <div class="bloc-titre"><h3>Bon à savoir</h3></div>
+      <div class="carte creme">
+        <div class="lieu-carte">
+          <h4>Tenue</h4>
+          <address>Chic champêtre. Beige, rosé, vert sauge, lin : piochez dans nos couleurs. Prévoyez des chaussures compatibles avec l'herbe, le vin d'honneur se tient dehors.</address>
+          <h4>Enfants</h4>
+          <address>Ils sont les bienvenus, du début à la fin de la soirée.</address>
+          <h4>Se garer</h4>
+          <address>Parking à l'entrée du domaine. Covoiturage encouragé au départ de Strasbourg, environ 30 minutes de route.</address>
+        </div>
+      </div>
+
+      <div class="bloc-titre"><h3>Questions fréquentes</h3></div>
+      <div id="faq"></div>
+
+      <div class="bloc-titre" style="margin-top:26px"><h3>Nos témoins</h3></div>
+      <div class="duo" id="contacts"></div>
+
+      <p class="pied">À très vite · A &amp; A</p>
+    </section>
+
+    <!-- ---------- LIVRE D'OR ---------- -->
+    <section class="view" id="v-livre">
+      <div class="titre-vue">
+        <p class="eyebrow">Vos mots</p>
+        <h2>Livre d'or</h2>
+        <p>Laissez-nous quelques lignes : nous les relirons longtemps après la fête.</p>
+      </div>
+
+      <div class="carte creme">
+        <label class="champ">
+          <span>Votre nom</span>
+          <input type="text" id="motNom" placeholder="Camille Weber" autocomplete="name" maxlength="60">
+        </label>
+        <label class="champ">
+          <span>Votre message</span>
+          <textarea id="motTexte" placeholder="Écrivez-nous…" maxlength="600"></textarea>
+          <em class="compteur" id="motCompteur" style="font-style:normal">0 / 600</em>
+        </label>
+        <button class="btn" id="motEnvoyer">Publier mon message</button>
+      </div>
+
+      <div class="sep-sprig">
+        <svg class="sprig" width="40" height="12" viewBox="0 0 40 12" aria-hidden="true">
+          <path d="M20 1c0 4-3 8-8 10 0-4 3-8 8-10Z"/><path d="M20 1c0 4 3 8 8 10 0-4-3-8-8-10Z"/>
+        </svg>
+      </div>
+
+      <p class="compte-mots" id="compteMots"></p>
+      <div id="listeMots"></div>
+    </section>
+
+    <!-- ---------- CAGNOTTE ---------- -->
+    <section class="view" id="v-cagnotte">
+      <div class="titre-vue">
+        <p class="eyebrow">Notre voyage de noces</p>
+        <h2>Cagnotte</h2>
+        <p>Votre présence est déjà le plus beau des cadeaux. Pour ceux qui souhaitent nous gâter, voici quatre façons de participer.</p>
+      </div>
+
+      <details class="moyen" open>
+        <summary>
+          <span class="ico">W</span>
+          <span class="lib"><strong>Wero</strong><span>Instantané, depuis votre appli bancaire</span></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 6l4 4 4-4"/></svg>
+        </summary>
+        <div class="moyen-corps">
+          <p class="note">Envoyez votre participation au numéro ci-dessous depuis Wero ou depuis votre application bancaire (« Payer un proche »).</p>
+          <div class="ligne-copie">
+            <span><span class="cle">Numéro</span><span class="val" id="veroTel">06 12 34 56 78</span></span>
+            <button class="copier" data-copie="veroTel">Copier</button>
+          </div>
+          <a class="btn" href="#" onclick="return false">Ouvrir Wero</a>
+        </div>
+      </details>
+
+      <details class="moyen">
+        <summary>
+          <span class="ico">P</span>
+          <span class="lib"><strong>PayPal</strong><span>Carte bancaire ou solde PayPal</span></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 6l4 4 4-4"/></svg>
+        </summary>
+        <div class="moyen-corps">
+          <p class="note">Pensez à choisir « Entre proches » pour éviter les frais.</p>
+          <div class="ligne-copie">
+            <span><span class="cle">Lien</span><span class="val" id="ppLien">paypal.me/alexandraetallan</span></span>
+            <button class="copier" data-copie="ppLien">Copier</button>
+          </div>
+          <a class="btn" href="#" onclick="return false">Payer avec PayPal</a>
+        </div>
+      </details>
+
+      <details class="moyen">
+        <summary>
+          <span class="ico">V</span>
+          <span class="lib"><strong>Virement</strong><span>Notre RIB, à copier en un geste</span></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 6l4 4 4-4"/></svg>
+        </summary>
+        <div class="moyen-corps">
+          <p class="note">Indiquez votre nom en libellé, cela nous aidera pour les remerciements.</p>
+          <div class="ligne-copie">
+            <span><span class="cle">Titulaire</span><span class="val" id="ribNom">M. Allan &amp; Mme Alexandra —</span></span>
+            <button class="copier" data-copie="ribNom">Copier</button>
+          </div>
+          <div class="ligne-copie">
+            <span><span class="cle">IBAN</span><span class="val" id="ribIban">FR76 1234 5678 9012 3456 7890 123</span></span>
+            <button class="copier" data-copie="ribIban">Copier</button>
+          </div>
+          <div class="ligne-copie">
+            <span><span class="cle">BIC</span><span class="val" id="ribBic">CMCIFR2A</span></span>
+            <button class="copier" data-copie="ribBic">Copier</button>
+          </div>
+        </div>
+      </details>
+
+      <details class="moyen">
+        <summary>
+          <span class="ico">U</span>
+          <span class="lib"><strong>Espèces ou chèque</strong><span>Le jour J, sur place</span></span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 6l4 4 4-4"/></svg>
+        </summary>
+        <div class="moyen-corps">
+          <p class="note" style="margin:0">Une urne vous attend à l'entrée de la salle, près du plan de table. Les chèques sont à libeller à l'ordre d'<strong style="font-weight:400;color:var(--encre)">Alexandra —</strong>. Aucune obligation : votre présence suffit largement.</p>
+        </div>
+      </details>
+
+      <p class="pied">Merci du fond du cœur</p>
+    </section>
+
+    <!-- ---------- ALBUM ---------- -->
+    <section class="view" id="v-album">
+      <div class="titre-vue">
+        <p class="eyebrow">Vos photos</p>
+        <h2>Album partagé</h2>
+        <p>Déposez vos clichés du jour J. Cinq photos par envoi, autant d'envois que vous voulez.</p>
+      </div>
+
+      <div class="depot">
+        <svg class="sprig" width="34" height="30" viewBox="0 0 34 30" style="margin:0 auto" aria-hidden="true">
+          <path d="M3 9h6l2-4h12l2 4h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2Z"/>
+          <path d="M17 22a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
+        </svg>
+        <span class="serif">Ajouter des photos</span>
+        <p>JPG ou PNG · 5 maximum par envoi</p>
+        <input type="file" id="fichiers" accept="image/*" multiple hidden>
+        <button class="btn creux" id="btnParcourir">Choisir mes photos</button>
+      </div>
+
+      <div id="zoneApercus"></div>
+
+      <div class="sep-sprig">
+        <svg class="sprig" width="40" height="12" viewBox="0 0 40 12" aria-hidden="true">
+          <path d="M20 1c0 4-3 8-8 10 0-4 3-8 8-10Z"/><path d="M20 1c0 4 3 8 8 10 0-4-3-8-8-10Z"/>
+        </svg>
+      </div>
+
+      <p class="compte-mots" id="compteAlbum"></p>
+      <div class="grille" id="galerie"></div>
+    </section>
+
+  </main>
+
+  <!-- ---------- ONGLETS ---------- -->
+  <nav class="onglets" id="onglets" aria-label="Navigation principale">
+    <button data-vue="v-infos" class="actif">
+      <svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      <span class="lb">Infos</span>
+    </button>
+    <button data-vue="v-livre">
+      <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M8 8h7M8 12h5"/></svg>
+      <span class="lb">Livre d'or</span>
+    </button>
+    <button data-vue="v-cagnotte">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-7.5-10A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7.5 3c0 5.3-7.5 10-7.5 10Z"/></svg>
+      <span class="lb">Cagnotte</span>
+    </button>
+    <button data-vue="v-album">
+      <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 6l1.5-2.5h5L16 6"/><circle cx="12" cy="13" r="3.5"/></svg>
+      <span class="lb">Album</span>
+    </button>
+  </nav>
+</div>
+
+<!-- Visionneuse -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo en grand">
+  <button class="lb-fermer" id="lbFermer" aria-label="Fermer">×</button>
+  <img id="lbImage" alt="">
+  <p class="legende" id="lbLegende"></p>
+  <div class="lb-nav">
+    <button id="lbPrec" aria-label="Photo précédente">‹</button>
+    <button id="lbSuiv" aria-label="Photo suivante">›</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ==============================================================
+   MAQUETTE — Application de mariage
+   Données en mémoire uniquement : chaque point d'appel au futur
+   back-end (Debian + PHP/Node + SQLite/MariaDB) est marqué « API ».
+   ============================================================== */
+
+/* -------- 1. Configuration : tout se modifie ici -------- */
+var CONFIG = {
+  pin: "1109",
+  programme: [
+    { h:"16 h 00", quoi:"Arrivée des invités",   det:"Accueil au domaine, prenez le temps" },
+    { h:"16 h 30", quoi:"Arrivée des mariés",    det:"" },
+    { h:"17 h 00", quoi:"Cérémonie laïque",      det:"Le moment que nous avons le plus préparé" },
+    { h:"18 h 00", quoi:"Vin d'honneur",         det:"Photos, jeux et retrouvailles" },
+    { h:"20 h 30", quoi:"Entrée en salle",       det:"Plan de table affiché à l'entrée" },
+    { h:"21 h 00", quoi:"Dîner",                 det:"" },
+    { h:"23 h 30", quoi:"Ouverture du bal",      det:"Puis la piste est à vous" }
+  ],
+  lieux: [
+    { nom:"Domaine Imodis",
+      adr:"Saessolsheim (67270)\nTout se passe ici : cérémonie, vin d'honneur, dîner et soirée.\n~30 min de Strasbourg",
+      maps:"https://www.google.com/maps/search/?api=1&query=Domaine+Imodis+Saessolsheim" }
+  ],
+  faq: [
+    { q:"À quelle heure dois-je arriver ?", r:"À 16 h. La cérémonie démarre à 17 h précises : mieux vaut être installé avant." },
+    { q:"Où se gare-t-on ?", r:"Parking sur place, à l'entrée du domaine. Le covoiturage depuis Strasbourg est vivement encouragé." },
+    { q:"Je suis végétarien / allergique.", r:"Signalez-le à Marie ou Yann dès que possible : le traiteur adapte les assiettes." },
+    { q:"Où dormir après la soirée ?", r:"Plusieurs hébergements se trouvent à moins de 15 minutes du domaine. Demandez-nous la liste si besoin." }
+  ],
+  temoins: [
+    { role:"Témoin", nom:"Marie", tel:"06 00 00 00 01" },
+    { role:"Témoin", nom:"Yann", tel:"06 00 00 00 02" }
+  ]
+};
+
+/* -------- 2. État en mémoire (remplacé par l'API en production) -------- */
+var messages = [
+  { nom:"Mamie Lucienne", texte:"Je vous ai vus grandir tous les deux. Vous voir vous dire oui aujourd'hui, c'est le plus beau cadeau que vous pouviez me faire.", date:"2026-08-14T10:12:00" },
+  { nom:"Les copains de la coloc", texte:"À la coloc de la rue des Bouchers, aux vacances ratées et à toutes celles qui viennent. On vous aime.", date:"2026-08-16T21:40:00" },
+  { nom:"L'équipe du bureau", texte:"On avait promis de ne pas faire de blague sur le tableur de plan de table. Promesse tenue. Tous nos vœux !", date:"2026-08-18T08:05:00" }
+];
+
+var photos = [];
+var enAttente = [];      // fichiers sélectionnés, pas encore envoyés
+var auteurPhoto = "";
+var indexLightbox = 0;
+
+/* Quelques photos de démonstration (dégradés générés, pas de fichiers externes) */
+(function seedPhotos(){
+  var duos = [["#E7C3BD","#F4EDE3"],["#8C9A82","#DCCFBC"],["#DCCFBC","#B0736B"],["#F4EDE3","#8C9A82"],["#B0736B","#E7C3BD"],["#FBF7F1","#DCCFBC"]];
+  var qui = ["Julie","Thomas","Papa","Camille","Léa","Marc"];
+  for (var i=0;i<duos.length;i++){
+    photos.push({ src:tuile(duos[i][0],duos[i][1],i), par:qui[i], demo:true });
+  }
+})();
+function tuile(a,b,i){
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">'
+    + '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">'
+    + '<stop offset="0" stop-color="'+a+'"/><stop offset="1" stop-color="'+b+'"/></linearGradient></defs>'
+    + '<rect width="400" height="400" fill="url(%23g)"/>'
+    + '<circle cx="'+(120+i*35)+'" cy="'+(150+i*20)+'" r="'+(60+i*8)+'" fill="rgba(255,255,255,.22)"/>'
+    + '<text x="200" y="368" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="rgba(59,52,44,.45)">photo de démonstration</text>'
+    + '</svg>';
+  return "data:image/svg+xml;charset=utf-8," + svg.replace(/#/g,"%23").replace(/"/g,"'");
+}
+
+/* -------- 3. Utilitaires -------- */
+var $ = function(s){ return document.querySelector(s); };
+function toast(txt){
+  var t = $("#toast"); t.textContent = txt; t.classList.add("on");
+  clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove("on"); }, 2600);
+}
+function initiales(nom){
+  var p = nom.trim().split(/\s+/);
+  return ((p[0]||"?")[0] + (p[1] ? p[1][0] : "")).toUpperCase();
+}
+function dateLisible(iso){
+  var d = new Date(iso);
+  var mois = ["janv.","févr.","mars","avril","mai","juin","juill.","août","sept.","oct.","nov.","déc."];
+  return d.getDate() + " " + mois[d.getMonth()] + " · " + ("0"+d.getHours()).slice(-2) + "h" + ("0"+d.getMinutes()).slice(-2);
+}
+function echappe(s){
+  return String(s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];
+  });
+}
+
+/* -------- 4. Code PIN -------- */
+var saisie = "";
+$("#pad").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  var k = b.dataset.k;
+  if (k === "clear") saisie = "";
+  else if (k === "del") saisie = saisie.slice(0,-1);
+  else if (saisie.length < 4) saisie += k;
+  majDots();
+  if (saisie.length === 4) setTimeout(verifier, 180);
+});
+document.addEventListener("keydown", function(e){
+  if ($("#gate").classList.contains("is-open")) return;
+  if (/^[0-9]$/.test(e.key) && saisie.length < 4){ saisie += e.key; majDots(); if(saisie.length===4) setTimeout(verifier,180); }
+  if (e.key === "Backspace"){ saisie = saisie.slice(0,-1); majDots(); }
+});
+function majDots(){
+  var d = $("#dots").children;
+  for (var i=0;i<4;i++) d[i].classList.toggle("on", i < saisie.length);
+}
+function verifier(){
+  if (saisie === CONFIG.pin){          // API : POST /api/session { pin } → cookie de session
+    $("#gateErreur").textContent = "";
+    $("#gate").classList.add("is-open");
+    $("#app").hidden = false;
+    setTimeout(function(){ $("#gate").style.display = "none"; }, 650);
+  } else {
+    $("#gateErreur").textContent = "Code incorrect";
+    $("#carteInvit").classList.add("is-shake");
+    if (navigator.vibrate) navigator.vibrate(80);
+    setTimeout(function(){
+      $("#carteInvit").classList.remove("is-shake");
+      saisie = ""; majDots();
+    }, 420);
+  }
+}
+
+/* -------- 5. Navigation -------- */
+function allerA(vue){
+  var boutons = $("#onglets").children;
+  for (var i=0;i<boutons.length;i++) boutons[i].classList.toggle("actif", boutons[i].dataset.vue === vue);
+  var vues = document.querySelectorAll(".view");
+  for (var j=0;j<vues.length;j++) vues[j].classList.toggle("is-active", vues[j].id === vue);
+  window.scrollTo({ top:0, behavior:"instant" });
+}
+$("#onglets").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  allerA(b.dataset.vue);
+});
+document.addEventListener("click", function(e){
+  var b = e.target.closest("[data-aller]"); if(!b) return;
+  allerA(b.dataset.aller);
+});
+
+/* -------- 6. Livre d'or -------- */
+function rendreMots(){                  // API : GET /api/messages
+  var box = $("#listeMots");
+  $("#compteMots").textContent = messages.length + (messages.length > 1 ? " messages" : " message");
+  if (!messages.length){
+    box.innerHTML = '<div class="vide"><span class="serif">Personne n\'a encore écrit</span>Soyez les premiers à nous laisser un mot.</div>';
+    $("#compteMots").textContent = "";
+    return;
+  }
+  var tri = messages.slice().sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+  var html = "";
+  for (var i=0;i<tri.length;i++){
+    html += '<article class="mot" style="animation-delay:' + (i*45) + 'ms">'
+      + '<div class="mot-tete"><div class="pastille">' + echappe(initiales(tri[i].nom)) + '</div>'
+      + '<div><div class="qui">' + echappe(tri[i].nom) + '</div>'
+      + '<div class="quand">' + dateLisible(tri[i].date) + '</div></div></div>'
+      + '<p>' + echappe(tri[i].texte) + '</p></article>';
+  }
+  box.innerHTML = html;
+}
+$("#motTexte").addEventListener("input", function(){
+  $("#motCompteur").textContent = this.value.length + " / 600";
+});
+$("#motEnvoyer").addEventListener("click", function(){
+  var nom = $("#motNom").value.trim();
+  var txt = $("#motTexte").value.trim();
+  if (nom.length < 2){ toast("Indiquez votre nom pour signer"); $("#motNom").focus(); return; }
+  if (txt.length < 3){ toast("Écrivez au moins un mot"); $("#motTexte").focus(); return; }
+  // API : POST /api/messages { nom, texte }
+  messages.push({ nom:nom, texte:txt, date:new Date().toISOString() });
+  $("#motTexte").value = ""; $("#motCompteur").textContent = "0 / 600";
+  rendreMots();
+  toast("Message publié, merci !");
+  window.scrollTo({ top: $("#compteMots").offsetTop - 40, behavior:"smooth" });
+});
+
+/* -------- 7. Cagnotte : copier -------- */
+document.addEventListener("click", function(e){
+  var b = e.target.closest(".copier"); if(!b) return;
+  var val = document.getElementById(b.dataset.copie).textContent.trim();
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(val).then(function(){ toast("Copié"); }, secours);
+  } else secours();
+  function secours(){
+    var ta = document.createElement("textarea");
+    ta.value = val; document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); toast("Copié"); } catch(err){ toast("Copie impossible"); }
+    document.body.removeChild(ta);
+  }
+});
+
+/* -------- 8. Album -------- */
+$("#btnParcourir").addEventListener("click", function(){ $("#fichiers").click(); });
+$("#fichiers").addEventListener("change", function(){
+  var f = Array.prototype.slice.call(this.files);
+  if (!f.length) return;
+  if (f.length > 5){ f = f.slice(0,5); toast("5 photos maximum par envoi"); }
+  enAttente = f.map(function(file){ return { file:file, url:URL.createObjectURL(file) }; });
+  this.value = "";
+  rendreApercus();
+});
+function rendreApercus(){
+  var z = $("#zoneApercus");
+  if (!enAttente.length){ z.innerHTML = ""; return; }
+  var html = '<div class="carte creme" style="margin-top:14px">'
+    + '<p class="eyebrow" style="margin:0 0 10px">' + enAttente.length + ' photo' + (enAttente.length>1?'s':'') + ' prête' + (enAttente.length>1?'s':'') + '</p>'
+    + '<div class="apercus">';
+  for (var i=0;i<enAttente.length;i++){
+    html += '<div class="apercu" style="animation-delay:'+(i*40)+'ms"><img src="'+enAttente[i].url+'" alt="">'
+      + '<button data-retirer="'+i+'" aria-label="Retirer">×</button></div>';
+  }
+  html += '</div><label class="champ" style="margin-top:4px"><span>Signé par</span>'
+    + '<input type="text" id="albumNom" maxlength="40" placeholder="Votre prénom" value="'+echappe(auteurPhoto)+'"></label>'
+    + '<button class="btn" id="btnEnvoyer">Envoyer ' + enAttente.length + ' photo' + (enAttente.length>1?'s':'') + '</button>'
+    + '<div class="barre" id="barre" hidden><i></i></div></div>';
+  z.innerHTML = html;
+}
+$("#zoneApercus").addEventListener("click", function(e){
+  var r = e.target.closest("[data-retirer]");
+  if (r){ enAttente.splice(+r.dataset.retirer,1); rendreApercus(); return; }
+  if (e.target.id === "btnEnvoyer") envoyerPhotos();
+});
+function envoyerPhotos(){
+  var nom = $("#albumNom").value.trim();
+  if (nom.length < 2){ toast("Indiquez votre prénom"); $("#albumNom").focus(); return; }
+  auteurPhoto = nom;
+  var barre = $("#barre"); barre.hidden = false;
+  var bouton = $("#btnEnvoyer"); bouton.disabled = true; bouton.textContent = "Envoi en cours…";
+  var p = 0;
+  var tic = setInterval(function(){          // API : POST /api/photos (multipart)
+    p += 9 + Math.random()*14;
+    barre.firstElementChild.style.width = Math.min(p,100) + "%";
+    if (p >= 100){
+      clearInterval(tic);
+      for (var i=0;i<enAttente.length;i++) photos.unshift({ src:enAttente[i].url, par:auteurPhoto });
+      var n = enAttente.length;
+      enAttente = []; rendreApercus(); rendreGalerie();
+      toast(n + " photo" + (n>1?"s ajoutées":" ajoutée") + " à l'album");
+    }
+  }, 160);
+}
+function rendreGalerie(){                     // API : GET /api/photos
+  var g = $("#galerie");
+  $("#compteAlbum").textContent = photos.length + (photos.length>1 ? " photos" : " photo");
+  if (!photos.length){
+    g.innerHTML = '<div class="vide" style="grid-column:1/-1"><span class="serif">L\'album est vide</span>La première photo vous attend.</div>';
+    return;
+  }
+  var html = "";
+  for (var i=0;i<photos.length;i++){
+    html += '<figure class="vignette" role="button" tabindex="0" data-i="'+i+'" style="animation-delay:'+(i*35)+'ms">'
+      + '<img src="'+photos[i].src+'" alt="Photo de '+echappe(photos[i].par)+'" loading="lazy">'
+      + '<figcaption>'+echappe(photos[i].par)+'</figcaption></figure>';
+  }
+  g.innerHTML = html;
+}
+$("#galerie").addEventListener("click", function(e){
+  var v = e.target.closest(".vignette"); if(!v) return;
+  ouvrirLightbox(+v.dataset.i);
+});
+$("#galerie").addEventListener("keydown", function(e){
+  if (e.key !== "Enter" && e.key !== " ") return;
+  var v = e.target.closest(".vignette"); if(!v) return;
+  e.preventDefault(); ouvrirLightbox(+v.dataset.i);
+});
+function ouvrirLightbox(i){
+  indexLightbox = i;
+  $("#lbImage").src = photos[i].src;
+  $("#lbLegende").textContent = photos[i].par + " · " + (i+1) + " / " + photos.length;
+  $("#lightbox").classList.add("is-open");
+  document.body.style.overflow = "hidden";
+}
+function fermerLightbox(){
+  $("#lightbox").classList.remove("is-open");
+  document.body.style.overflow = "";
+}
+function glisser(d){
+  indexLightbox = (indexLightbox + d + photos.length) % photos.length;
+  ouvrirLightbox(indexLightbox);
+}
+$("#lbFermer").addEventListener("click", fermerLightbox);
+$("#lbPrec").addEventListener("click", function(){ glisser(-1); });
+$("#lbSuiv").addEventListener("click", function(){ glisser(1); });
+$("#lightbox").addEventListener("click", function(e){ if (e.target === this) fermerLightbox(); });
+document.addEventListener("keydown", function(e){
+  if (!$("#lightbox").classList.contains("is-open")) return;
+  if (e.key === "Escape") fermerLightbox();
+  if (e.key === "ArrowLeft") glisser(-1);
+  if (e.key === "ArrowRight") glisser(1);
+});
+(function swipe(){
+  var x0 = null;
+  var lb = $("#lightbox");
+  lb.addEventListener("touchstart", function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener("touchend", function(e){
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 45) glisser(dx < 0 ? 1 : -1);
+    x0 = null;
+  });
+})();
+
+/* -------- 9. Infos pratiques (rendu depuis CONFIG) -------- */
+(function rendreInfos(){
+  var h = "";
+  for (var i=0;i<CONFIG.programme.length;i++){
+    var e = CONFIG.programme[i];
+    h += '<li><span class="h">'+e.h+'</span><span class="quoi"><strong>'+e.quoi+'</strong>'
+      + (e.det ? '<span>'+e.det+'</span>' : '') + '</span></li>';
+  }
+  $("#chrono").innerHTML = h;
+
+  h = "";
+  for (var j=0;j<CONFIG.lieux.length;j++){
+    var l = CONFIG.lieux[j];
+    h += '<div class="carte lieu-carte"><h4>'+l.nom+'</h4>'
+      + '<address>'+l.adr.replace(/\n/g,"<br>")+'</address>'
+      + '<a class="btn discret" href="'+l.maps+'">Ouvrir l\'itinéraire</a></div>';
+  }
+  $("#lieux").innerHTML = h;
+
+  h = "";
+  for (var k=0;k<CONFIG.faq.length;k++){
+    h += '<details class="faq"><summary><span class="q">'+CONFIG.faq[k].q+'</span>'
+      + '<svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 6l4 4 4-4"/></svg>'
+      + '</summary><p>'+CONFIG.faq[k].r+'</p></details>';
+  }
+  $("#faq").innerHTML = h;
+
+  h = "";
+  for (var m=0;m<CONFIG.temoins.length;m++){
+    var t = CONFIG.temoins[m];
+    h += '<div class="carte contact"><div class="role">'+t.role+'</div><div class="nom">'+t.nom+'</div>'
+      + '<a href="tel:'+t.tel.replace(/\s/g,"")+'">'+t.tel+'</a></div>';
+  }
+  $("#contacts").innerHTML = h;
+})();
+
+rendreMots();
+rendreGalerie();
+</script>
+</body>
+</html>
